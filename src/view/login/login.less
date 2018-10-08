@@ -1,0 +1,69 @@
+.login {
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/images/login-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    text-align: center;
+    h1 {
+        position: absolute; //     left: 50%;
+        //     width: 300px;
+        //     transform: translateX(-50%);
+        top: 10%; // text-align: center;
+        left: 50%;
+        width: 400px;
+        vertical-align: middle;
+        transform: translateX(-50%);
+        /* margin-bottom: 20px; */
+        /* background: ; */
+        font-family: 'Pacifico';
+        color: #62fdfa;
+        font-size: 5em;
+        /* width: auto; */
+        /* text-decoration:none; */
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        transition: all 0.5s;
+        -webkit-animation: neon1 1.5s ease-in-out infinite alternate;
+        -moz-animation: neon1 1.5s ease-in-out infinite alternate;
+        animation: neon1 1.5s ease-in-out infinite alternate;
+    }
+    @keyframes neon1 {
+        from {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #62fdfa, 0 0 70px #62fdfa, 0 0 80px #62fdfa, 0 0 100px #62fdfa, 0 0 150px #62fdfa, 0 0 155px #222222;
+        }
+        to {
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #62fdfa, 0 0 35px #62fdfa, 0 0 40px #62fdfa, 0 0 50px #62fdfa, 0 0 75px #62fdfa, 0 0 80px #222222;
+        }
+    }
+    &-con {
+        // position: absolute; // right: 160px;
+        // left: 50%;
+        // transform: translateX(30%);
+        // top: 50%;
+        // transform: translateY(-60%);
+        // width: 300px;
+        z-index: 10px;
+        position: absolute;
+        left: 50%;
+        margin-left: -150px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 300px;
+        &-header {
+            font-size: 16px;
+            font-weight: 300;
+            text-align: center;
+            padding: 30px 0;
+        }
+        .form-con {
+            padding: 10px 0 0;
+        }
+        .login-tip {
+            font-size: 10px;
+            text-align: center;
+            color: #444fe7
+        }
+    }
+}
