@@ -13,3 +13,9 @@ export const getDragList = () => {
     method: 'get'
   })
 }
+export const getTableBookData = () => {
+  return axios.request({
+    url: 'get_table_book_data',
+    method: 'get'
+  })
+}

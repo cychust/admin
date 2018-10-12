@@ -42,30 +42,30 @@ export default [{
         import('@/view/single-page/home')
     }]
   },
-  {
-    path: '',
-    name: 'doc',
-    meta: {
-      title: '文档',
-      href: 'https://lison16.github.io/iview-admin-doc/#/',
-      icon: 'ios-book'
-    }
-  },
-  {
-    path: '/join',
-    name: 'join',
-    component: Main,
-    children: [{
-      path: 'join_page',
-      name: 'join_page',
-      meta: {
-        icon: '_qq',
-        title: 'QQ群'
-      },
-      component: () =>
-        import('@/view/join-page.vue')
-    }]
-  },
+  // {
+  //   path: '',
+  //   name: 'doc',
+  //   meta: {
+  //     title: '文档',
+  //     href: 'https://lison16.github.io/iview-admin-doc/#/',
+  //     icon: 'ios-book'
+  //   }
+  // },
+  // {
+  //   path: '/join',
+  //   name: 'join',
+  //   component: Main,
+  //   children: [{
+  //     path: 'join_page',
+  //     name: 'join_page',
+  //     meta: {
+  //       icon: '_qq',
+  //       title: 'QQ群'
+  //     },
+  //     component: () =>
+  //       import('@/view/join-page.vue')
+  //   }]
+  // },
   {
     path: '/components',
     name: 'components',
@@ -224,24 +224,24 @@ export default [{
         import('@/view/tools-methods/tools-methods.vue')
     }]
   },
-  {
-    path: '/directive',
-    name: 'directive',
-    meta: {
-      hide: true
-    },
-    component: Main,
-    children: [{
-      path: 'directive_page',
-      name: 'directive_page',
-      meta: {
-        icon: 'ios-navigate',
-        title: '指令'
-      },
-      component: () =>
-        import('@/view/directive/directive.vue')
-    }]
-  },
+  // {
+  //   path: '/directive',
+  //   name: 'directive',
+  //   meta: {
+  //     hide: true
+  //   },
+  //   component: Main,
+  //   children: [{
+  //     path: 'directive_page',
+  //     name: 'directive_page',
+  //     meta: {
+  //       icon: 'ios-navigate',
+  //       title: '指令'
+  //     },
+  //     component: () =>
+  //       import('@/view/directive/directive.vue')
+  //   }]
+  // },
   {
     path: '/multilevel',
     name: 'multilevel',
@@ -361,5 +361,45 @@ export default [{
     },
     component: () =>
       import('@/view/register-form/register-form.vue')
+  },
+  {
+    path: '/system-ctl',
+    name: 'system-ctl',
+    meta: {
+      icon: 'logo-buffer',
+      title: '系统管理'
+    },
+    component: Main,
+    children: [{
+        path: 'admin-ctl',
+        name: 'admin-ctl',
+        meta: {
+          icon: 'md-trending-up',
+          title: '管理员管理'
+        },
+        component: () =>
+          import('@/view/system-ctl/admin-ctl/admin-ctl.vue')
+      },
+      {
+        path: 'user-ctl',
+        name: 'user-ctl',
+        meta: {
+          icon: 'ios-infinite',
+          title: '用户管理'
+        },
+        component: () =>
+          import('@/view/system-ctl/user-ctl/user-ctl.vue')
+      },
+      {
+        path: 'book-ctl',
+        name: 'book-ctl',
+        meta: {
+          icon: 'md-grid',
+          title: '图书管理'
+        },
+        component: () =>
+          import('@/view/system-ctl/book-ctl/book-ctl.vue')
+      }
+    ]
   },
 ]

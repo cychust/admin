@@ -1,5 +1,12 @@
-import { login, logout, getUserInfo } from '@/api/user'
-import { setToken, getToken } from '@/libs/util'
+import {
+  login,
+  logout,
+  getUserInfo
+} from '@/api/user'
+import {
+  setToken,
+  getToken
+} from '@/libs/util'
 
 export default {
   state: {
@@ -17,6 +24,7 @@ export default {
       state.userId = id
     },
     setUserName (state, name) {
+      // console.error('setusername')
       state.userName = name
     },
     setAccess (state, access) {
@@ -29,7 +37,12 @@ export default {
   },
   actions: {
     // 登录
-    handleLogin ({ commit }, {userName, password}) {
+    handleLogin ({
+      commit
+    }, {
+      userName,
+      password
+    }) {
       userName = userName.trim()
       return new Promise((resolve, reject) => {
         login({
@@ -38,6 +51,8 @@ export default {
         }).then(res => {
           const data = res.data
           commit('setToken', data.token)
+          commit('setUserName', data.user_name)
+          console.error(data)
           resolve()
         }).catch(err => {
           reject(err)
@@ -45,11 +60,16 @@ export default {
       })
     },
     // 退出登录
-    handleLogOut ({ state, commit }) {
+    handleLogOut ({
+      state,
+      commit
+    }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('setToken', '')
           commit('setAccess', [])
+          console.error(state.access)
+          console.error(state.userName)
           resolve()
         }).catch(err => {
           reject(err)
@@ -61,14 +81,19 @@ export default {
       })
     },
     // 获取用户相关信息
-    getUserInfo ({ state, commit }) {
+    getUserInfo ({
+      state,
+      commit
+    }) {
       return new Promise((resolve, reject) => {
         getUserInfo(state.token).then(res => {
           const data = res.data
           commit('setAvator', data.avator)
-          commit('setUserName', data.user_name)
+          // commit('setUserName', data.user_name)
+          commit('setUserName', data.name)
           commit('setUserId', data.user_id)
           commit('setAccess', data.access)
+          // console.error(data)
           resolve(data)
         }).catch(err => {
           reject(err)
