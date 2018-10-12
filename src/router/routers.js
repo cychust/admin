@@ -42,30 +42,6 @@ export default [{
         import('@/view/single-page/home')
     }]
   },
-  // {
-  //   path: '',
-  //   name: 'doc',
-  //   meta: {
-  //     title: '文档',
-  //     href: 'https://lison16.github.io/iview-admin-doc/#/',
-  //     icon: 'ios-book'
-  //   }
-  // },
-  // {
-  //   path: '/join',
-  //   name: 'join',
-  //   component: Main,
-  //   children: [{
-  //     path: 'join_page',
-  //     name: 'join_page',
-  //     meta: {
-  //       icon: '_qq',
-  //       title: 'QQ群'
-  //     },
-  //     component: () =>
-  //       import('@/view/join-page.vue')
-  //   }]
-  // },
   {
     path: '/components',
     name: 'components',
@@ -176,72 +152,55 @@ export default [{
       }
     ]
   },
-  {
-    path: '/excel',
-    name: 'excel',
-    meta: {
-      icon: 'ios-stats',
-      title: 'EXCEL导入导出'
-    },
-    component: Main,
-    children: [{
-        path: 'upload-excel',
-        name: 'upload-excel',
-        meta: {
-          icon: 'md-add',
-          title: '导入EXCEL'
-        },
-        component: () =>
-          import('@/view/excel/upload-excel.vue')
-      },
-      {
-        path: 'export-excel',
-        name: 'export-excel',
-        meta: {
-          icon: 'md-download',
-          title: '导出EXCEL'
-        },
-        component: () =>
-          import('@/view/excel/export-excel.vue')
-      }
-    ]
-  },
-  {
-    path: '/tools_methods',
-    name: 'tools_methods',
-    meta: {
-      hide: true
-    },
-    component: Main,
-    children: [{
-      path: 'tools_methods_page',
-      name: 'tools_methods_page',
-      meta: {
-        icon: 'ios-hammer',
-        title: '工具方法'
-      },
-      component: () =>
-        import('@/view/tools-methods/tools-methods.vue')
-    }]
-  },
   // {
-  //   path: '/directive',
-  //   name: 'directive',
+  //   path: '/excel',
+  //   name: 'excel',
+  //   meta: {
+  //     icon: 'ios-stats',
+  //     title: 'EXCEL导入导出'
+  //   },
+  //   component: Main,
+  //   children: [{
+  //       path: 'upload-excel',
+  //       name: 'upload-excel',
+  //       meta: {
+  //         icon: 'md-add',
+  //         title: '导入EXCEL'
+  //       },
+  //       component: () =>
+  //         import('@/view/excel/upload-excel.vue')
+  //     },
+  //     {
+  //       path: 'export-excel',
+  //       name: 'export-excel',
+  //       meta: {
+  //         icon: 'md-download',
+  //         title: '导出EXCEL'
+  //       },
+  //       component: () =>
+  //         import('@/view/excel/export-excel.vue')
+  //     }
+  //   ]
+  // },
+  // {
+  //   path: '/tools_methods',
+  //   name: 'tools_methods',
   //   meta: {
   //     hide: true
   //   },
   //   component: Main,
   //   children: [{
-  //     path: 'directive_page',
-  //     name: 'directive_page',
+  //     path: 'tools_methods_page',
+  //     name: 'tools_methods_page',
   //     meta: {
-  //       icon: 'ios-navigate',
-  //       title: '指令'
+  //       icon: 'ios-hammer',
+  //       title: '工具方法'
   //     },
   //     component: () =>
-  //       import('@/view/directive/directive.vue')
+  //       import('@/view/tools-methods/tools-methods.vue')
   //   }]
   // },
+
   {
     path: '/multilevel',
     name: 'multilevel',
@@ -361,6 +320,24 @@ export default [{
     },
     component: () =>
       import('@/view/register-form/register-form.vue')
+  },
+  {
+    path: '/search',
+    name: 'search',
+    meta: {
+      hide: true
+    },
+    component: Main,
+    children: [{
+      path: 'search',
+      name: 'search',
+      meta: {
+        icon: 'ios-book',
+        title: '搜索'
+      },
+      component: () =>
+        import('@/view/join-page.vue')
+    }]
   },
   {
     path: '/system-ctl',
