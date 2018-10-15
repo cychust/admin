@@ -4,6 +4,7 @@
 
 <template>
   <div class="login">
+    <div class="background"></div>
     <h1>图书管理系统</h1>
     <div class="login-con">
       <Card icon="log-in"
@@ -13,8 +14,7 @@
           <login-form @on-success-valid="handleSubmit"></login-form>
           <!-- <p class="login-tip">输入任意用户名和密码即可</p> -->
           <a href="/register">
-            <Button type="primary"
-                    @click="toRegister">点击注册
+            <Button @click="toRegister">点击注册
             </Button>
           </a>
         </div>

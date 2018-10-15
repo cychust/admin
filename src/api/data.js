@@ -19,3 +19,11 @@ export const getTableBookData = () => {
     method: 'get'
   })
 }
+export const getSearchData = (keyword) => {
+  // console.error('in1')
+  return axios.request({
+    url: 'https://sug.so.360.cn/suggest?word=' + keyword + '&encodein=utf-8&encodeout=utf-8'
+    // method: 'get'
+    // withCredentials: false
+  })
+}

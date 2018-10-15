@@ -1,28 +1,40 @@
 <template>
   <div>
     <Row :gutter="20">
-      <i-col span="4" v-for="(infor, i) in inforCardData" :key="`infor-${i}`" style="height: 120px;">
-        <infor-card shadow :color="infor.color" :icon="infor.icon" :icon-size="36">
-          <count-to :end="infor.count" count-class="count-style"/>
+      <i-col span="4"
+             v-for="(infor, i) in inforCardData"
+             :key="`infor-${i}`"
+             style="height: 120px;">
+        <infor-card shadow
+                    :color="infor.color"
+                    :icon="infor.icon"
+                    :icon-size="36">
+          <count-to :end="infor.count"
+                    count-class="count-style" />
           <p>{{ infor.title }}</p>
         </infor-card>
       </i-col>
     </Row>
-    <Row :gutter="20" style="margin-top: 20px;">
+    <Row :gutter="20"
+         style="margin-top: 20px;">
       <i-col span="8">
         <Card shadow>
-          <chart-pie style="height: 300px;" :value="pieData" text="用户访问来源"></chart-pie>
+          <chart-pie style="height: 300px;"
+                     :value="pieData"
+                     text="用户访问来源"></chart-pie>
         </Card>
       </i-col>
       <i-col span="16">
         <Card shadow>
-          <chart-bar style="height: 300px;" :value="barData" text="每周用户活跃量"/>
+          <chart-bar style="height: 300px;"
+                     :value="barData"
+                     text="每周用户活跃量" />
         </Card>
       </i-col>
     </Row>
     <Row style="margin-top: 20px;">
       <Card shadow>
-        <example style="height: 310px;"/>
+        <example style="height: 310px;" />
       </Card>
     </Row>
   </div>
@@ -77,7 +89,7 @@ export default {
 </script>
 
 <style lang="less">
-.count-style{
+.count-style {
   font-size: 50px;
 }
 </style>

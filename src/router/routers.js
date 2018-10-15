@@ -43,6 +43,24 @@ export default [{
     }]
   },
   {
+    path: '/messages',
+    name: 'messages',
+    meta: {
+      hide: true,
+    },
+    component: Main,
+    children: [{
+      path: '/messages',
+      name: 'messages',
+      meta: {
+        icon: 'ios-book',
+        title: '信息总览'
+      },
+      component: () =>
+        import('@/view/messages/messages')
+    }]
+  },
+  {
     path: '/components',
     name: 'components',
     meta: {
@@ -329,14 +347,14 @@ export default [{
     },
     component: Main,
     children: [{
-      path: 'search',
+      path: '/search',
       name: 'search',
       meta: {
         icon: 'ios-book',
         title: '搜索'
       },
       component: () =>
-        import('@/view/join-page.vue')
+        import('@/view/search/search.vue')
     }]
   },
   {
@@ -378,5 +396,15 @@ export default [{
           import('@/view/system-ctl/book-ctl/book-ctl.vue')
       }
     ]
-  },
+  }, {
+    path: '/borrow',
+    name: 'borrow',
+    meta: {
+      hide: true,
+      icon: 'ios-infinite',
+      title: '借书'
+    },
+    component: () =>
+      import('@/view/borrow/borrow.vue')
+  }
 ]

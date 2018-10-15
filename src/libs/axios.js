@@ -1,4 +1,5 @@
 import axios from 'axios'
+// axios.defaults.withCredentials = true
 // import { Spin } from 'iview'
 class HttpRequest {
   constructor (baseUrl = baseURL) {
@@ -35,15 +36,28 @@ class HttpRequest {
     // 响应拦截
     instance.interceptors.response.use(res => {
       this.distroy(url)
-      const { data, status } = res
-      return { data, status }
+      const {
+        data,
+        status
+      } = res
+      return {
+        data,
+        status
+      }
     }, error => {
       this.distroy(url)
       return Promise.reject(error)
     })
   }
   request (options) {
-    const instance = axios.create()
+    const instance = axios.create({
+      // withCredentials: false
+      withCredentials: true,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
     options = Object.assign(this.getInsideConfig(), options)
     this.interceptors(instance, options.url)
     return instance(options)
