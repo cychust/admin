@@ -1,4 +1,7 @@
 import axios from 'axios'
+import {
+  getToken
+} from '@/libs/util'
 // axios.defaults.withCredentials = true
 // import { Spin } from 'iview'
 class HttpRequest {
@@ -11,6 +14,10 @@ class HttpRequest {
       baseURL: this.baseUrl,
       headers: {
         //
+        'Content-type': 'application/json',
+        'Cache-Control': 'no-cache',
+        'X-Request-With': 'XMLHttpRequest',
+        'Accept': 'application/json'
       }
     }
     return config
@@ -27,6 +34,10 @@ class HttpRequest {
       // 添加全局的loading...
       if (!Object.keys(this.queue).length) {
         // Spin.show() // 不建议开启，因为界面不友好
+      }
+      const token = getToken()
+      if (token) {
+        config.headers.Authorization = 'Bearer  ' + token
       }
       this.queue[url] = true
       return config
@@ -50,14 +61,7 @@ class HttpRequest {
     })
   }
   request (options) {
-    const instance = axios.create({
-      // withCredentials: false
-      withCredentials: true,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    })
+    const instance = axios.create()
     options = Object.assign(this.getInsideConfig(), options)
     this.interceptors(instance, options.url)
     return instance(options)

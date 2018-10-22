@@ -19,7 +19,7 @@
 </template>
 <script>
 import Tables from '_c/tables'
-import { getTableBookData } from '@/api/data'
+import { getTableBookData, saveTableBookData } from '@/api/data'
 export default {
   components: {
     Tables
@@ -28,34 +28,58 @@ export default {
     return {
       pageTotal: 100,
       columns: [
-        {title: '书籍编号', key: 'id', sortable: true},
-        {title: '书籍名称', key: 'book_name', sortable: true, editable: true},
+        {title: '书籍编号', key: 'id', sortable: true, require: true},
+        {title: '书籍名称', key: 'book_name', sortable: true, editable: true, require: true},
         {title: '书籍类别', key: 'book_category', editable: true, sortable: true},
         {title: '作者姓名', key: 'author_name', editable: true, sortable: true},
         {title: '出版社', key: 'publish_horse', sortable: true},
         {title: '出版日期', key: 'publish_date', sortable: true},
-        {title: '书籍页数', key: 'page_number', sortable: true},
+        {title: '书籍页数', key: 'page_number', type: Number, sortable: true},
         {title: '备注信息', key: 'remarks', sortable: false},
         // {title: '出版日期', key: 'updateTime', sortable: true},
         {
           title: 'Handle',
           key: 'handle',
+          fixed: 'right',
+          width: 180,
           // options: ['delete'],
           button: [
             (h, params) => {
               return h('Button', {
-                props: {'type': 'primary'},
+                props: {'type': 'primary', 'size': 'small'},
+                // style: {'width': '60px'},
                 on: {
                   click: () => {
                     this.show(params.index)
                   }
                 }}, '查看')
             },
+            (h, params) => {
+              return h('Poptip', {
+                props: {
+                  confirm: true,
+                  title: '你确定要保存吗?',
+                  transfer: true
+                },
+                on: {
+                  'on-ok': () => {
+                    this.save(params.index)
+                  }
+                }
+              }, [
+                h('Button', {
+                  props: {'type': 'primary', 'size': 'small'},
+                  style: {'margin': '3px'}
+                },
+                '保存')
+              ])
+            },
             (h, params, vm) => {
               return h('Poptip', {
                 props: {
                   confirm: true,
-                  title: '你确定要删除吗?'
+                  title: '你确定要删除吗?',
+                  transfer: true
                 },
                 on: {
                   'on-ok': () => {
@@ -65,7 +89,11 @@ export default {
                   }
                 }
               }, [
-                h('Button', {props: {'type': 'error'}, style: {'width': 'auto'}}, '删除')
+                h('Button', {
+                  props: {'type': 'error', 'size': 'small'}
+                  // style: {'width': '60px'}
+                },
+                '删除')
               ])
             }
           ]
@@ -85,6 +113,27 @@ export default {
     },
     showSuccessMessage () {
       this.$Message.success('删除成功')
+    },
+    save (index) {
+      if (this.tableData[index].id == null || this.tableData[index].book_name == null) {
+        this.$Message.error('保存失败')
+      } else {
+        const tableData = {
+          id: this.tableData[index].id,
+          bookName: this.tableData[index].book_name,
+          bookCategory: this.tableData[index].book_category,
+          authorName: this.tableData[index].author_name,
+          publishHorse: this.tableData[index].publish_horse,
+          publishDate: this.tableData[index].publish_date,
+          pageNumber: this.tableData[index].page_namber,
+          remarks: this.tableData[index].remarks
+        }
+        saveTableBookData(tableData).then(res => {
+          this.$Message.success('保存成功')
+        }).catch(err => {
+          console.error(err)
+        })
+      }
     },
     show (index) {
       this.$Modal.info({
@@ -146,7 +195,8 @@ export default {
   },
   mounted () {
     getTableBookData().then(result => {
-      this.tableData = result.data
+      console.error(result.data.data)
+      this.tableData = result.data.data
     })
   }
 }

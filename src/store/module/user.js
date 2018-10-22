@@ -40,22 +40,25 @@ export default {
     handleLogin ({
       commit
     }, {
-      userName,
+      username,
       password
     }) {
-      userName = userName.trim()
+      // userName = userName.trim()
       return new Promise((resolve, reject) => {
         login({
-          userName,
+          username,
           password
         }).then(res => {
           const data = res.data
-          commit('setToken', data.token)
-          commit('setUserName', data.user_name)
+          commit('setToken', data.data.token)
+          // commit('setUserName', data.user_name)
           console.error(data)
+          console.error(data.data.token)
           resolve()
         }).catch(err => {
+          console.error('2222')
           reject(err)
+          console.error('login failer')
         })
       })
     },
@@ -65,19 +68,19 @@ export default {
       commit
     }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('setToken', '')
-          commit('setAccess', [])
-          console.error(state.access)
-          console.error(state.userName)
-          resolve()
-        }).catch(err => {
-          reject(err)
-        })
+        // logout(state.token).then(() => {
+        //   commit('setToken', '')
+        //   commit('setAccess', [])
+        //   console.error(state.access)
+        //   console.error(state.userName)
+        //   resolve()
+        // }).catch(err => {
+        //   reject(err)
+        // })
         // 如果你的退出登录无需请求接口，则可以直接使用下面三行代码而无需使用logout调用接口
-        // commit('setToken', '')
-        // commit('setAccess', [])
-        // resolve()
+        commit('setToken', '')
+        commit('setAccess', [])
+        resolve()
       })
     },
     // 获取用户相关信息
@@ -86,18 +89,20 @@ export default {
       commit
     }) {
       return new Promise((resolve, reject) => {
-        getUserInfo(state.token).then(res => {
-          const data = res.data
-          commit('setAvator', data.avator)
-          // commit('setUserName', data.user_name)
-          commit('setUserName', data.name)
-          commit('setUserId', data.user_id)
-          commit('setAccess', data.access)
-          // console.error(data)
-          resolve(data)
-        }).catch(err => {
-          reject(err)
-        })
+        // getUserInfo(state.token).then(res => {
+        //   const data = res.data
+        //   commit('setAvator', data.avator)
+        //   // commit('setUserName', data.user_name)
+        //   commit('setUserName', data.name)
+        //   commit('setUserId', data.user_id)
+        //   commit('setAccess', data.access)
+        //   // console.error(data)
+        //   resolve(data)
+        // }).catch(err => {
+        //   reject(err)
+        // })
+        commit('setAccess', ['admin', 'super_admin'])
+        resolve()
       })
     }
   }

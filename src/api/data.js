@@ -15,7 +15,7 @@ export const getDragList = () => {
 }
 export const getTableBookData = () => {
   return axios.request({
-    url: 'get_table_book_data',
+    url: 'http://localhost:9966/api/bookList',
     method: 'get'
   })
 }
@@ -25,5 +25,13 @@ export const getSearchData = (keyword) => {
     url: 'https://sug.so.360.cn/suggest?word=' + keyword + '&encodein=utf-8&encodeout=utf-8'
     // method: 'get'
     // withCredentials: false
+  })
+}
+
+export const saveTableBookData = (bookData) => {
+  return axios.request({
+    url: 'http://localhost:9966/api/bookList/insertBook',
+    bookData,
+    method: 'post'
   })
 }

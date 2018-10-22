@@ -1,30 +1,38 @@
 import axios from '@/libs/api.request'
 
-export const login = ({ userName, password }) => {
+export const login = ({
+  username,
+  password
+}) => {
   const data = {
-    userName,
+    username,
     password
   }
+  // let param = new URLSearchParams()
+  // param.append('username', 'cyc')
+  // param.append('password', 'cyc')
+  // console.error('1111111')
+  // console.error(data)
   return axios.request({
-    url: 'login',
+    url: 'http://localhost:9966/api/auth/login',
     data,
     method: 'post'
   })
 }
 
 export const getUserInfo = (token) => {
-  return axios.request({
-    url: 'get_info',
-    params: {
-      token
-    },
-    method: 'get'
-  })
+  // return axios.request({
+  //   url: 'get_info',
+  //   params: {
+  //     token
+  //   },
+  //   method: 'get'
+  // })
 }
 
 export const logout = (token) => {
-  return axios.request({
-    url: 'logout',
-    method: 'post'
-  })
+  // return axios.request({
+  //   url: 'logout',
+  //   method: 'post'
+  // })
 }

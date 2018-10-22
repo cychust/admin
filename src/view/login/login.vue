@@ -35,13 +35,19 @@ export default {
       'handleLogin',
       'getUserInfo'
     ]),
-    handleSubmit ({ userName, password }) {
-      this.handleLogin({ userName, password }).then(res => {
+    handleSubmit ({ username, password }) {
+      console.error('start login')
+      this.handleLogin({ username, password }).then(res => {
         this.getUserInfo().then(res => {
+          console.error('login success')
           this.$router.push({
             name: 'home'
           })
         })
+        // console.error('3333')
+        // this.$router.push({
+        //   name: 'home'
+        // })
       })
     },
     toRegister () {
