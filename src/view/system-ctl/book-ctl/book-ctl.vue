@@ -8,7 +8,15 @@
               v-model="tableData"
               :columns="columns"
               boder
+              stripe
               @on-delete="handleDelete" />
+
+      <Button style="margin: 10px 0;"
+              type="primary"
+              @click="exportExcel">导出为Csv文件</Button>
+      <Button style="margin: 10px 5px;"
+              type="error"
+              @click="addAdmin">添加书籍</Button>
 
       <Page :total="pageTotal"
             show-elevator
@@ -26,16 +34,17 @@ export default {
   },
   data () {
     return {
+      stripe: true,
       pageTotal: 100,
       columns: [
-        {title: '书籍编号', key: 'id', sortable: true, require: true},
+        {title: '书籍编号', key: 'id', sortable: true, require: true, editable: true},
         {title: '书籍名称', key: 'book_name', sortable: true, editable: true, require: true},
         {title: '书籍类别', key: 'book_category', editable: true, sortable: true},
         {title: '作者姓名', key: 'author_name', editable: true, sortable: true},
-        {title: '出版社', key: 'publish_horse', sortable: true},
-        {title: '出版日期', key: 'publish_date', sortable: true},
-        {title: '书籍页数', key: 'page_number', type: Number, sortable: true},
-        {title: '备注信息', key: 'remarks', sortable: false},
+        {title: '出版社', key: 'publish_horse', sortable: true, editable: true},
+        {title: '出版日期', key: 'publish_date', sortable: true, editable: true},
+        {title: '书籍页数', key: 'page_number', type: Number, sortable: true, editable: true},
+        {title: '备注信息', key: 'remarks', sortable: false, editable: true},
         // {title: '出版日期', key: 'updateTime', sortable: true},
         {
           title: 'Handle',
@@ -110,6 +119,17 @@ export default {
       this.$refs.tables.exportCsv({
         filename: `table-${(new Date()).valueOf()}.csv`
       })
+    },
+    addAdmin () {
+      const initData = {
+        id: this.tableData.length + 1,
+        name: 'ccc',
+        email: '121@qq.com',
+        access: ['super_admin', 'admin'],
+        createTime: new Date(),
+        updateTime: new Date()
+      }
+      this.tableData.push(initData)
     },
     showSuccessMessage () {
       this.$Message.success('删除成功')

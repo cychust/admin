@@ -406,5 +406,24 @@ export default [{
     },
     component: () =>
       import('@/view/borrow/borrow.vue')
+  },
+  {
+    path: '/horse',
+    name: 'horse',
+    meta: {
+      hide: true,
+    },
+    component: Main,
+    children: [{
+      path: '/horse',
+      name: 'horse',
+      meta: {
+        icon: 'ios-infinite',
+        title: '出版社'
+      },
+      component: () =>
+        import('@/view/horse/horse.vue')
+    }],
+
   }
 ]

@@ -12,6 +12,9 @@
       <Button style="margin: 10px 0;"
               type="primary"
               @click="exportExcel">导出为Csv文件</Button>
+      <Button style="margin: 10px 5px;"
+              type="error"
+              @click="addAdmin">添加管理员</Button>
     </Card>
   </div>
 </template>
@@ -78,6 +81,17 @@ export default {
       this.$refs.tables.exportCsv({
         filename: `table-${(new Date()).valueOf()}.csv`
       })
+    },
+    addAdmin () {
+      const initData = {
+        id: this.tableData.length + 1,
+        name: 'ccc',
+        email: '121@qq.com',
+        access: ['super_admin', 'admin'],
+        createTime: new Date(),
+        updateTime: new Date()
+      }
+      this.tableData.push(initData)
     },
     show (index) {
       this.$Modal.info({

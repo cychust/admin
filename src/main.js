@@ -11,6 +11,9 @@ import importDirective from '@/directive'
 import 'iview/dist/styles/iview.css'
 import './index.less'
 import '@/assets/icons/iconfont.css'
+import echarts from 'echarts'
+
+Vue.prototype.$echarts = echarts
 // import '@/mock'
 // 实际打包时应该不引入mock
 /* eslint-disable */
@@ -34,6 +37,7 @@ new Vue({
   el: '#app',
   router,
   i18n,
+  echarts,
   store,
   render: h => h(App)
 })
