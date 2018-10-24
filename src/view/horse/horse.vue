@@ -1,6 +1,6 @@
 <template>
   <div id="mapContainer"
-       style="width:1000px; height:800px; text-align:center"></div>
+       style="width:98%; height:800px; text-align:center"></div>
 </template>
 <script>
 // import option from './map-option.js'
@@ -23,6 +23,7 @@ export default{
     drawChinaMap () {
       var myChart = this.$echarts.init(document.getElementById('mapContainer'))
       var option = {
+        // title: '出版社概览',
         geo: {
           map: 'china'
         },
