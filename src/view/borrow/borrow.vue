@@ -1,242 +1,288 @@
 <template>
   <div>
-    <div class="borrow">
-      <Search></Search>
-      <!-- 电脑专场 -->
-      <div class="item-class">
-        <div class="item-class-head">
-          <span class="item-class-title">{{computer.title}}</span>
-          <ul>
-            <li v-for="(item, index) in computer.link"
-                :key="index">
-              <router-link to="/goodsList">{{item}}</router-link>
-            </li>
-          </ul>
-        </div>
-        <div class="item-class-content"
-             v-for="(item, index) in computer.detail"
-             :key="index">
-          <div class="item-content-top">
-            <div class="item-big-img">
-              <router-link to="/goodsList">
-                <img :src="item.bigImg"
-                     alt="">
-              </router-link>
+    <Sreach></Sreach>
+    <GoodsListNav></GoodsListNav>
+    <div class="container">
+      <div class="bread-crumb">
+        <Breadcrumb>
+          <BreadcrumbItem to="/">
+            <Icon type="ios-home-outline"></Icon> 首页
+          </BreadcrumbItem>
+          <BreadcrumbItem to="/goodsList?sreachData=">
+            <Icon type="bag"></Icon> {{sreachItem}}
+          </BreadcrumbItem>
+        </Breadcrumb>
+      </div>
+      <!-- 商品标签导航 -->
+      <GoodsClassNav></GoodsClassNav>
+      <!-- 商品展示容器 -->
+      <div class="goods-box">
+        <div class="as-box">
+          <div class="item-as-title">
+            <span>商品精选</span>
+            <span>广告</span>
+          </div>
+          <div class="item-as"
+               v-for="(item,index) in asItems"
+               :key="index">
+            <div class="item-as-img">
+              <img :src="item.img"
+                   alt="">
             </div>
-            <div class="item-four-img">
-              <div class="item-four-detail"
-                   v-for="(subItem, index) in item.itemFour"
-                   :key="index">
-                <div class="item-four-detail-text">
-                  <p class="pt_bi_tit">{{subItem.title}}</p>
-                  <p class="pt_bi_promo">{{subItem.intro}}</p>
-                </div>
-                <div class="item-four-detail-img">
-                  <router-link to="/goodsList">
-                    <img :src="subItem.img"
-                         alt="">
-                  </router-link>
-                </div>
-              </div>
+            <div class="item-as-price">
+              <span>
+                <Icon type="social-yen text-danger"></Icon>
+                <span class="seckill-price text-danger">{{item.price}}</span>
+              </span>
+            </div>
+            <div class="item-as-intro">
+              <span>{{item.intro}}</span>
+            </div>
+            <div class="item-as-selled">
+              已有<span>{{item.num}}</span>人评价
             </div>
           </div>
-          <div class="item-content-bottom">
-            <div class="item-content-bottom-img"
-                 v-for="(subImg, index) in item.itemContent"
+        </div>
+        <div class="goods-list-box">
+          <div class="goods-list-tool">
+            <ul>
+              <li v-for="(item,index) in goodsTool"
+                  :key="index"
+                  @click="orderBy(item.en, index)"><span :class="{ 'goods-list-tool-active': isAction[index]}">{{item.title}} <Icon :type="icon[index]"></Icon></span></li>
+            </ul>
+          </div>
+          <div class="goods-list">
+            <div class="goods-show-info"
+                 v-for="(item, index) in orderGoodsList"
                  :key="index">
-              <router-link to="/goodsList">
-                <img :src="subImg">
-              </router-link>
+              <div class="goods-show-img">
+                <router-link to="/goodsDetail"><img :src="item.img" /></router-link>
+              </div>
+              <div class="goods-show-price">
+                <span>
+                  <Icon type="social-yen text-danger"></Icon>
+                  <span class="seckill-price text-danger">{{item.price}}</span>
+                </span>
+              </div>
+              <div class="goods-show-detail">
+                <span>{{item.intro}}</span>
+              </div>
+              <div class="goods-show-num">
+                已有<span>{{item.remarks}}</span>人评价
+              </div>
+              <div class="goods-show-seller">
+                <span>{{item.shopName}}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="goods-page">
+        <Page :total="100"
+              show-sizer></Page>
+      </div>
     </div>
+    <!-- <Footer></Footer> -->
+    <Spin size="large"
+          fix
+          v-if="isLoading"></Spin>
   </div>
 </template>
+
 <script>
-import Search from './Search.vue'
-import {mapActions, mapState} from 'vuex'
+import Sreach from './Search.vue'
+import GoodsListNav from './nav/GoodsListNav.vue'
+import GoodsClassNav from './/nav/GoodsClassNav.vue'
+// import Footer from '@/components/footer/Footer'
 import store from '@/store'
-export default{
-  name: 'borrow',
+import { mapState, mapActions, mapGetters, mapMutations } from 'vuex'
+export default {
+  name: 'GoodsList',
   data () {
     return {
-      computer: {}
+      sreachItem: '',
+      isAction: [ true, false, false ],
+      icon: [ 'arrow-up-a', 'arrow-down-a', 'arrow-down-a' ],
+      goodsTool: [
+        {title: '综合', en: 'sale'},
+        {title: '评论数', en: 'remarks'},
+        {title: '价格', en: 'price'}
+      ]
+    }
+  },
+  computed: {
+    ...mapState(['asItems', 'isLoading']),
+    ...mapGetters(['orderGoodsList'])
+  },
+  methods: {
+    ...mapActions(['loadGoodsList']),
+    ...mapMutations(['SET_GOODS_ORDER_BY']),
+    orderBy (data, index) {
+      console.log(data)
+      this.icon = [ 'arrow-down-a', 'arrow-down-a', 'arrow-down-a' ]
+      this.isAction = [ false, false, false ]
+      this.isAction[index] = true
+      this.icon[index] = 'arrow-up-a'
+      this.SET_GOODS_ORDER_BY(data)
     }
   },
   created () {
-    this.loadComputer()
+    this.loadGoodsList()
   },
   mounted () {
-    console.error('this')
-    this.loadComputer()
-    this.computer = this.$store.state.borrow.computer
-    console.error(this.$store.state.borrow.computer)
-    console.error('aaa')
-  },
-  methods: {
-    ...mapActions(['loadComputer'])
+    this.sreachItem = this.$route.query.sreachData
   },
   components: {
-    Search
-  },
-  computed: {
-    ...mapState(['computer'])
+    Sreach,
+    GoodsListNav,
+    GoodsClassNav
+    // Footer
   },
   store
 }
 </script>
-<style>
-.borrow {
-  width: 1080px;
-  margin: 0 auto;
+
+<style scoped>
+.container {
+  margin: 15px auto;
+  width: 93%;
+  min-width: 1000px;
 }
-/*****************************商品专栏开始*****************************/
-.item-class {
+.text-danger {
+  color: #a94442;
+}
+.seckill-price {
+  margin-right: 5px;
+  font-size: 25px;
+  font-weight: bold;
+}
+.goods-box {
+  display: flex;
+}
+/* ---------------侧边广告栏开始------------------- */
+.as-box {
+  width: 200px;
+  border: 1px solid #ccc;
+}
+.item-as-title {
   width: 100%;
-  height: 470px;
-  margin-top: 15px;
+  height: 36px;
+  color: #b1191a;
+  line-height: 36px;
+  font-size: 18px;
+}
+.item-as-title span:first-child {
+  margin-left: 20px;
+}
+.item-as-title span:last-child {
+  float: right;
+  margin-right: 15px;
+  font-size: 10px;
+  color: #ccc;
+}
+.item-as {
+  width: 160px;
+  margin: 18px auto;
+}
+.item-as-img {
+  width: 160px;
+  height: 160px;
+  margin: 0px auto;
+}
+.item-as-price span {
+  font-size: 18px;
+}
+.item-as-intro {
+  margin-top: 5px;
+  font-size: 12px;
+}
+.item-as-selled {
+  margin-top: 5px;
+  font-size: 12px;
+}
+.item-as-selled span {
+  color: #005aa0;
+}
+/* ---------------侧边广告栏结束------------------- */
+
+/* ---------------商品栏开始------------------- */
+.goods-list-box {
+  margin-left: 15px;
+  width: calc(100% - 215px);
+}
+.goods-list-tool {
+  width: 100%;
+  height: 38px;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+.goods-list-tool ul {
+  padding-left: 15px;
+  list-style: none;
+}
+.goods-list-tool li {
+  cursor: pointer;
+  float: left;
+}
+.goods-list-tool span {
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-left: none;
+  line-height: 36px;
   background-color: #fff;
 }
-.item-class-head {
-  width: 100%;
-  height: 50px;
-  background-color: #4488a7;
+.goods-list-tool span:hover {
+  border: 1px solid #e4393c;
 }
-.item-class-eat-head {
-  background-color: #ecb226;
+.goods-list-tool i:hover {
+  color: #e4393c;
 }
-.item-class-head ul {
-  list-style: none;
-  float: right;
-  margin-right: 30px;
-  line-height: 50px;
-}
-.item-class-head a {
-  padding: 6px;
-  margin-left: 15px;
-  font-size: 12px;
-  background-color: #6da6be;
-  border: 1px solid #6da6be;
-  text-decoration: none;
+.goods-list-tool-active {
   color: #fff;
-}
-.item-class-eat-head a {
-  background-color: #eeb955;
-  border: 1px solid #eeb955;
-}
-.item-class-head a:hover {
-  border: 1px solid #fff;
-}
-.item-class-head li {
-  float: left;
-}
-.item-class-title {
-  font-size: 25px;
-  line-height: 50px;
-  color: #fff;
-  margin-left: 15px;
-}
-.item-class-content {
-  width: 49%;
-  cursor: pointer;
-  border-right: 1px solid #ccc;
-  margin-left: 0.9%;
-  /*background-color: #cff;*/
-  float: left;
-}
-.item-class-content:nth-child(odd) {
-  border: none;
-}
-.item-content-top {
-  width: 100%;
-  height: 260px;
-}
-.item-big-img {
-  width: 180px;
-  height: 260px;
-  overflow: hidden;
-  float: left;
-}
-.item-big-img img {
-  margin-left: 0px;
-  transition: margin-left 0.3s;
-}
-.item-big-img:hover img {
-  margin-left: -15px;
-  transition: margin-left 0.3s;
-}
-.item-four-img {
-  width: 303px;
-  margin-left: 8px;
-  float: left;
-}
-.item-four-detail img {
-  margin-left: 0px;
-  transition: margin-left 0.3s;
-}
-.item-four-detail:hover img {
-  margin-left: -6px;
-  transition: margin-left 0.3s;
-}
-.item-four-detail {
-  width: 152px;
-  height: 130px;
-  margin-left: -1px;
-  float: left;
-}
-.item-four-detail:first-child {
-  border-right: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
-}
-.item-four-detail:last-child {
-  border-top: 1px solid #ccc;
   border-left: 1px solid #ccc;
+  background-color: #e4393c !important;
 }
-.item-four-detail-text {
-  width: 50px;
-  margin-left: 5px;
-  margin-top: 15px;
-  float: left;
+
+.goods-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.item-four-detail-img {
-  width: 96px;
-  margin-top: 15px;
-  overflow: hidden;
-  float: left;
+.goods-show-info {
+  width: 240px;
+  padding: 10px;
+  margin: 15px 0px;
+  border: 1px solid #fff;
+  cursor: pointer;
 }
-.item-four-detail-img img {
-  margin-left: 5px;
-  width: 90px;
+.goods-show-info:hover {
+  border: 1px solid #ccc;
+  box-shadow: 0px 0px 15px #ccc;
 }
-.pt_bi_tit {
-  font-weight: bold;
+.goods-show-price {
+  margin-top: 6px;
+}
+.goods-show-detail {
   font-size: 12px;
-  color: #4488a7;
+  margin: 6px 0px;
 }
-.pt_bi_tit-eat {
-  color: #ecb127;
+.goods-show-num {
+  font-size: 12px;
+  margin-bottom: 6px;
+  color: #009688;
 }
-.pt_bi_promo {
-  color: #00695c;
+.goods-show-num span {
+  color: #005aa0;
+  font-weight: bold;
 }
-.item-content-bottom {
-  width: 100%;
-  margin-top: 8px;
+.goods-show-seller {
+  font-size: 12px;
+  color: #e4393c;
 }
-.item-content-bottom-img {
-  width: 156px;
-  margin-right: 8px;
-  overflow: hidden;
-  float: left;
+.goods-page {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
 }
-.item-content-bottom-img img {
-  margin-left: 0px;
-  transition: margin-left 0.3s;
-}
-.item-content-bottom-img:hover img {
-  margin-left: -15px;
-  transition: margin-left 0.3s;
-}
+/* ---------------商品栏结束------------------- */
 </style>

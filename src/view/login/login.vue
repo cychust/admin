@@ -36,7 +36,6 @@ export default {
       'getUserInfo'
     ]),
     handleSubmit ({ username, password }) {
-      console.error('start login')
       this.handleLogin({ username, password }).then(res => {
         this.getUserInfo().then(res => {
           console.error('login success')
@@ -47,7 +46,10 @@ export default {
         // console.error('3333')
         // this.$router.push({
         //   name: 'home'
-        // })
+        // })\
+      }).catch(err => {
+        this.$Message.error('网络错误')
+        throw err
       })
     },
     toRegister () {

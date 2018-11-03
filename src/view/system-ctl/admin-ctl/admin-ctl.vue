@@ -20,7 +20,8 @@
 </template>
 <script>
 import Tables from '_c/tables'
-import { getTableData } from '@/api/data'
+import { getAdminListData } from '@/api/data'
+import { adminListDataMerge } from '@/libs/util'
 export default {
   components: {
     Tables
@@ -32,11 +33,9 @@ export default {
       emailEditable: false,
       columns: [
         {title: 'ID', key: 'id', sortable: true},
-        {title: '角色名称', key: 'name', sortable: true, editable: true},
-        {title: 'Email', key: 'email', editable: true},
-        {title: '权限', key: 'access', editable: true},
+        {title: '角色名称', key: 'username', sortable: true, editable: true},
+        {title: '权限', key: 'roles', editable: true},
         {title: '创建时间', key: 'createTime', editable: true},
-        {title: '更新时间', key: 'updateTime', sortable: true},
         {
           title: 'Handle',
           key: 'handle',
@@ -85,11 +84,9 @@ export default {
     addAdmin () {
       const initData = {
         id: this.tableData.length + 1,
-        name: 'ccc',
-        email: '121@qq.com',
+        username: 'ccc',
         access: ['super_admin', 'admin'],
-        createTime: new Date(),
-        updateTime: new Date()
+        createTime: new Date()
       }
       this.tableData.push(initData)
     },
@@ -125,25 +122,26 @@ export default {
             }, [
               h('div', [`ID     ：${this.tableData[index].id}`]),
               h('Divider'),
-              h('div', [`角色名称：${this.tableData[index].name}`]),
-              h('Divider'),
-              h('div', [`Email  ：${this.tableData[index].email}`]),
-              h('Divider'),
-              h('div', [`权限    ：${this.tableData[index].access}`]),
+              h('div', [`角色名称：${this.tableData[index].username}`]),
               h('Divider'),
               h('div', [`创建时间 ：${this.tableData[index].createTime}`]),
               h('Divider'),
-              h('div', [`更新时间 ：${this.tableData[index].updateTime}`]),
-              h('Divider'),
-              h('div', [`权限    ：${this.tableData[index].access}`])
+              h('div', [`权限    ：${this.tableData[index].roles}`])
             ])])
         }
       })
     }
   },
   mounted () {
-    getTableData().then(result => {
-      this.tableData = result.data
+    getAdminListData().then(result => {
+      console.error(result.data)
+      var data = adminListDataMerge(result.data.data)
+      this.tableData = data
+      console.error(data)
+    }).catch(err => {
+      console.error('获取数据失败')
+      this.$Message.error('获取数据失败')
+      throw err
     })
   }
 }

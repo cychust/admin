@@ -380,10 +380,10 @@ export default [{
         name: 'user-ctl',
         meta: {
           icon: 'ios-infinite',
-          title: '用户管理'
+          title: '订单管理'
         },
         component: () =>
-          import('@/view/system-ctl/user-ctl/user-ctl.vue')
+          import('@/view/system-ctl/order-ctl/order-ctl.vue')
       },
       {
         path: 'book-ctl',

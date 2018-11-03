@@ -326,3 +326,22 @@ export const routeHasExist = (tagNavList, routeItem) => {
   })
   return res
 }
+
+export const adminListDataMerge = (data) => {
+  var adminData = new Array(0)
+  data.forEach((value) => {
+    var allRoles = new Array(' ')
+    value.roles.forEach((value) => {
+      allRoles.push(value.role)
+    })
+    allRoles.splice(0, 1)
+    var item = {
+      'id': value.id,
+      'username': value.username,
+      'roles': allRoles
+    }
+    adminData.push(item)
+  })
+  // delete adminData[0]
+  return adminData
+}

@@ -1,88 +1,200 @@
 export default {
   state: {
-    computer: {}
+    asItems: [] // 广告
   },
   actions: {
-    // 加载电脑专栏数据
-    loadComputer ({
-      state,
+    loadGoodsList ({
       commit
     }) {
+      commit('SET_LOAD_STATUS', true)
       return new Promise((resolve, reject) => {
-        const computer = {
-          title: '电脑数码',
-          link: ['电脑馆', '游戏极品', '装机大师', '职场焕新', '女神频道', '虚拟现实', '二合一平板', '电子教育', '万物周刊'],
-          detail: [{
-            bigImg: '../../assets/computer/item-computer-1.jpg',
-            itemFour: [{
-              title: '电脑馆',
-              intro: '笔记本999元限量秒！',
-              img: '../../assets/computer/item-computer-2.jpg'
+        setTimeout(() => {
+          const data = {
+            asItems: [{
+              img: 'static/img/goodsList/item-as-img-1.jpg',
+              price: 39.9,
+              intro: 'SKSK 苹果7/7plus手机壳 iPhone 7 Plus保护套全包硬',
+              num: 3140,
+              sale: 9000
             },
             {
-              title: '外设装备',
-              intro: '1000减618',
-              img: '../../assets/computer/item-computer-1-3.jpg'
+              img: 'static/img/goodsList/item-as-img-2.jpg',
+              price: 36.6,
+              intro: '狮普 苹果7/7 Plus手机壳 电镀 超薄 全包 防摔 保护外',
+              num: 6160,
+              sale: 8900
             },
             {
-              title: '电脑配件',
-              intro: '联合满减最高省618',
-              img: '../../assets/computer/item-computer-1-4.jpg'
+              img: 'static/img/goodsList/item-as-img-1.jpg',
+              price: 38.6,
+              intro: 'SKSK 苹果7/7plus手机壳 iPhone 7 Plus保护套全包硬',
+              num: 9160,
+              sale: 8800
             },
             {
-              title: '办公生活',
-              intro: '5折神券 精品文具',
-              img: '../../assets/computer/item-computer-1-5.jpg'
+              img: 'static/img/goodsList/item-as-img-2.jpg',
+              price: 35.6,
+              intro: '狮普 苹果7/7 Plus手机壳 电镀 超薄 全包 防摔 保护外',
+              num: 6160,
+              sale: 7990
+            },
+            {
+              img: 'static/img/goodsList/item-as-img-1.jpg',
+              price: 38.6,
+              intro: 'SKSK 苹果7/7plus手机壳 iPhone 7 Plus保护套全包硬',
+              num: 9160,
+              sale: 7600
+            },
+            {
+              img: 'static/img/goodsList/item-as-img-2.jpg',
+              price: 35.6,
+              intro: '狮普 苹果7/7 Plus手机壳 电镀 超薄 全包 防摔 保护外',
+              num: 6160,
+              sale: 6900
             }
             ],
-            itemContent: [
-              '../../assets/computer/item-computer-1-6.jpg',
-              '../../assets/computer/item-computer-1-7.jpg',
-              '../../assets/computer/item-computer-1-8.jpg'
-            ]
-          },
-          {
-            bigImg: '../../assets/computer/item-computer-2-1.jpg',
-            itemFour: [{
-              title: '平板电脑',
-              intro: '爆款平板12期免息',
-              img: '../../assets/computer/item-computer-2-2.jpg'
+            goodsList: [{
+              img: 'static/img/goodsList/item-show-1.jpg',
+              price: 36.60,
+              intro: 'SKSK 苹果7/7plus手机壳 iPhone 7 Plus保护套全包硬壳男女磨砂防摔 火影红(苹',
+              remarks: 6160,
+              shopName: '元亨利配件专营店',
+              sale: 9900
             },
             {
-              title: '智能酷玩',
-              intro: '抢999减666神券',
-              img: '../../assets/computer/item-computer-2-3.jpg'
+              img: 'static/img/goodsList/item-show-2.jpg',
+              price: 28.00,
+              intro: '蒙奇奇 苹果6s手机壳磨砂防摔保护套 适用于iphone6/6s/6sPlus/6plus 6/6s 4.7英',
+              remarks: 3000,
+              shopName: 'monqiqi旗舰店',
+              sale: 9600
             },
             {
-              title: '娱乐影音',
-              intro: '大牌耳机低至5折',
-              img: '../../assets/computer/item-computer-2-4.jpg'
+              img: 'static/img/goodsList/item-show-3.jpg',
+              price: 15.00,
+              intro: 'BIAZE 苹果6/6s手机壳 苹果iphone6s 4.7英寸透明手机套 清爽系列',
+              remarks: 2800,
+              shopName: 'BIAZE官方旗舰店',
+              sale: 8900
             },
             {
-              title: '摄影摄像',
-              intro: '大牌相机5折抢',
-              img: '../../assets/computer/item-computer-2-5.jpg'
+              img: 'static/img/goodsList/item-show-4.jpg',
+              price: 29.90,
+              intro: '慕臣 苹果6s手机壳全包防摔磨砂软保护套男女 适用于iPhone6splus',
+              remarks: 9000,
+              shopName: '歌乐力手配专营店',
+              sale: 8600
+            },
+            {
+              img: 'static/img/goodsList/item-show-5.jpg',
+              price: 15.00,
+              intro: 'BIAZE 苹果6/6s手机壳 苹果iphone6s 4.7英寸透明手机套 清爽系列',
+              remarks: 6160,
+              shopName: 'BIAZE官方旗舰店',
+              sale: 8560
+            },
+            {
+              img: 'static/img/goodsList/item-show-6.jpg',
+              price: 28.00,
+              intro: '慕臣 苹果6s手机壳全包防摔磨砂软保护套男女 适用于iPhone6splus',
+              remarks: 9006,
+              shopName: '歌乐力手配专营店',
+              sale: 8530
+            },
+            {
+              img: 'static/img/goodsList/item-show-7.jpg',
+              price: 15.00,
+              intro: 'BIAZE 苹果6/6s手机壳 苹果iphone6s 4.7英寸透明手机套 清爽系列',
+              remarks: 8666,
+              shopName: 'BIAZE官方旗舰店',
+              sale: 8360
+            },
+            {
+              img: 'static/img/goodsList/item-show-8.jpg',
+              price: 29.90,
+              intro: '慕臣 苹果6s手机壳全包防摔磨砂软保护套男女 适用于iPhone6splus',
+              remarks: 6080,
+              shopName: '歌乐力手配专营店',
+              sale: 7560
+            },
+            {
+              img: 'static/img/goodsList/item-show-1.jpg',
+              price: 36.60,
+              intro: 'SKSK 苹果7/7plus手机壳 iPhone 7 Plus保护套全包硬壳男女磨砂防摔 火影红(苹',
+              remarks: 6160,
+              shopName: '元亨利配件专营店',
+              sale: 7360
+            },
+            {
+              img: 'static/img/goodsList/item-show-2.jpg',
+              price: 28.00,
+              intro: '蒙奇奇 苹果6s手机壳磨砂防摔保护套 适用于iphone6/6s/6sPlus/6plus 6/6s 4.7英',
+              remarks: 3000,
+              shopName: 'monqiqi旗舰店',
+              sale: 6960
+            },
+            {
+              img: 'static/img/goodsList/item-show-3.jpg',
+              price: 15.00,
+              intro: 'BIAZE 苹果6/6s手机壳 苹果iphone6s 4.7英寸透明手机套 清爽系列',
+              remarks: 2800,
+              shopName: 'BIAZE官方旗舰店',
+              sale: 6560
+            },
+            {
+              img: 'static/img/goodsList/item-show-4.jpg',
+              price: 29.90,
+              intro: '慕臣 苹果6s手机壳全包防摔磨砂软保护套男女 适用于iPhone6splus',
+              remarks: 9000,
+              shopName: '歌乐力手配专营店',
+              sale: 6360
+            },
+            {
+              img: 'static/img/goodsList/item-show-5.jpg',
+              price: 15.00,
+              intro: 'BIAZE 苹果6/6s手机壳 苹果iphone6s 4.7英寸透明手机套 清爽系列',
+              remarks: 6160,
+              shopName: 'BIAZE官方旗舰店',
+              sale: 5530
+            },
+            {
+              img: 'static/img/goodsList/item-show-6.jpg',
+              price: 28.00,
+              intro: '慕臣 苹果6s手机壳全包防摔磨砂软保护套男女 适用于iPhone6splus',
+              remarks: 9006,
+              shopName: '歌乐力手配专营店',
+              sale: 5560
+            },
+            {
+              img: 'static/img/goodsList/item-show-7.jpg',
+              price: 15.00,
+              intro: 'BIAZE 苹果6/6s手机壳 苹果iphone6s 4.7英寸透明手机套 清爽系列',
+              remarks: 8666,
+              shopName: 'BIAZE官方旗舰店',
+              sale: 5260
+            },
+            {
+              img: 'static/img/goodsList/item-show-8.jpg',
+              price: 29.90,
+              intro: '慕臣 苹果6s手机壳全包防摔磨砂软保护套男女 适用于iPhone6splus',
+              remarks: 6080,
+              shopName: '歌乐力手配专营店',
+              sale: 3560
             }
-            ],
-            itemContent: [
-              '../../assets/computer/item-computer-2-6.jpg',
-              '../../assets/computer/item-computer-2-7.jpg',
-              '../../assets/computer/item-computer-2-8.jpg'
             ]
           }
-          ]
-        }
-        commit('SET_COMPUTER_INFO', computer)
-        console.error(computer)
-        console.error(state.computer)
-        // console.error('loadcom')
+          commit('SET_GOODS_LIST', data)
+          commit('SET_LOAD_STATUS', false)
+        })
       })
     }
-
   },
   mutations: {
     SET_COMPUTER_INFO (state, computer) {
       state.computer = computer
+    },
+    SET_CAROUSELITEMS_INFO (state, CarouselItems) {
+      state.CarouselItems = CarouselItems
     }
   }
 }
