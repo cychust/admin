@@ -20,6 +20,16 @@ export default [{
     },
     component: () =>
       import('@/view/login/login.vue')
+  }, {
+    path: '/BookDetail',
+    name: 'BookDetail',
+    meta: {
+      // title: 'register - 注册',
+      hideInMenu: true,
+      notCache: true
+    },
+    component: () =>
+      import('@/view/borrow/BookDetail.vue')
   },
   {
     path: '/',

@@ -1,12 +1,8 @@
 <template>
   <div>
     <div class="contrainer">
-      <Header></Header>
-      <Search></Search>
       <!-- 电脑专场 -->
       <div class="content">
-        <!-- 内容 -->
-        <!-- 电脑专场 -->
         <div class="item-class">
           <div class="item-class-head">
             <span class="item-class-title">{{computer.title}}</span>
@@ -16,7 +12,7 @@
                :key="index">
             <div class="item-content-top">
               <div class="item-big-img">
-                <router-link to="/BookDetail">
+                <router-link to="/goodsList">
                   <img :src="item.bigImg"
                        alt="">
                 </router-link>
@@ -38,15 +34,21 @@
                 </div>
               </div>
             </div>
-
+            <div class="item-content-bottom">
+              <div class="item-content-bottom-img"
+                   v-for="(subImg, index) in item.itemContent"
+                   :key="index">
+                <router-link to="/goodsList">
+                  <img :src="subImg">
+                </router-link>
+              </div>
+            </div>
           </div>
         </div>
         <!-- 爱吃专场 -->
         <div class="item-class">
           <div class="item-class-head item-class-eat-head">
             <span class="item-class-title">{{eat.title}}</span>
-
-            </ul>
           </div>
           <div class="item-class-content"
                v-for="(item, index) in eat.detail"
@@ -73,37 +75,34 @@
                 </div>
               </div>
             </div>
-
+            <div class="item-content-bottom">
+              <div class="item-content-bottom-img"
+                   v-for="(subImg, index) in item.itemContent"
+                   :key="index">
+                <router-link to="/goodsList">
+                  <img :src="subImg">
+                </router-link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <Footer></Footer>
     </div>
   </div>
 </template>
-
 <script>
-import Header from './Header'
-import Search from './Search'
-// import Footer from './Footer'
 import { loadComputerList, loadFavoriteList } from '@/api/data'
 export default {
-  name: 'borrow',
+  name: 'bookList',
   data () {
     return {
-      sreachItem: '',
-
       computer: {
         title: '计算机类'
       },
       eat: {}
     }
   },
-  computed: {
-  },
   methods: {
-  },
-  created () {
 
   },
   mounted () {
@@ -113,12 +112,6 @@ export default {
     loadFavoriteList().then((result) => {
       this.eat = result
     })
-  },
-  components: {
-    Search,
-    Header
-    // BookList,
-    // Footer
   }
 }
 </script>
@@ -131,137 +124,10 @@ export default {
   width: 1008px;
   margin: 0px auto;
 }
-/*****************************秒杀专栏开始*****************************/
-/*秒杀专栏*/
-.seckill {
-  width: 100%;
-  height: 330px;
-  margin: 15px auto;
-  background-color: #fff;
-}
-.seckill-head {
-  width: 100%;
-  height: 50px;
-  background-color: #e01222;
-}
-.seckill-icon {
-  width: 68px;
-  height: 100%;
-  float: left;
-}
-.seckill-icon img {
-  width: 35px;
-  height: 35px;
-  margin-top: 6px;
-  margin-left: 15px;
-  animation-name: shake-clock;
-  animation-duration: 0.3s;
-  animation-iteration-count: infinite; /*设置无线循环*/
-}
-/*定义闹钟震动动画关键帧*/
-@keyframes shake-clock {
-  0% {
-    transform: rotate(-8deg);
-  }
-  50% {
-    transform: rotate(8deg);
-  }
-  100% {
-    transform: rotate(-8deg);
-  }
-}
-.seckill-text {
-  width: 300px;
-  height: 100%;
-  float: left;
-}
-.seckill-text .seckill-title {
-  font-size: 22px;
-  line-height: 50px;
-  color: #fff;
-}
-.seckill-text .seckill-remarks {
-  margin-left: 5px;
-  font-size: 10px;
-  color: #fff;
-}
-/*倒计时*/
-.count-down {
-  height: 100%;
-  margin-right: 30px;
-  line-height: 50px;
-  float: right;
-}
-.count-down-text {
-  color: #fff;
-}
-.count-down-num {
-  padding: 3px;
-  border-radius: 5px;
-  background-color: #440106;
-  font-size: 26px;
-  font-weight: bold;
-  color: #f90013;
-}
-.count-down-point {
-  font-size: 26px;
-  font-weight: bold;
-  color: #440106;
-}
-
-.seckill-content {
-  width: 100%;
-  height: 280px;
-}
-.seckill-item {
-  width: 183px;
-  height: 250px;
-  margin-top: 15px;
-  margin-left: 15px;
-  box-shadow: 0px 0px 8px #ccc;
-  cursor: pointer;
-  float: left;
-}
-.seckill-item-img {
-  width: 160px;
-  height: 160px;
-  margin: 0px auto;
-  overflow: hidden;
-  border-bottom: 1px solid #ccc;
-  background-color: #fff;
-}
-.seckill-item-img img {
-  width: 130px;
-  height: 130px;
-  margin-left: 15px;
-  margin-top: 15px;
-  transition: margin-top 0.3s;
-}
-.seckill-item-img:hover img {
-  margin-top: 6px;
-  transition: margin-top 0.3s;
-}
-.seckill-item-info {
-  padding: 5px;
-  padding-left: 15px;
-  padding-right: 15px;
-  font-size: 12px;
-  color: #009688;
-}
-.seckill-item-info i:first-child {
-  font-size: 14px;
-}
-.seckill-price {
-  margin-right: 5px;
-  font-size: 25px;
-  font-weight: bold;
-}
-/*****************************秒杀专栏结束*****************************/
-
 /*****************************商品专栏开始*****************************/
 .item-class {
   width: 100%;
-  height: 400px;
+  height: 470px;
   margin-top: 15px;
   background-color: #fff;
 }
