@@ -43,12 +43,13 @@ export default {
             name: 'home'
           })
         })
-        // console.error('3333')
-        // this.$router.push({
-        //   name: 'home'
-        // })\
       }).catch(err => {
-        this.$Message.error('网络错误')
+        if (err.response.status === 401) {
+          this.$Message.error('授权失败')
+        } else {
+          this.$Message.error('网络错误')
+        }
+        console.error(err)
         throw err
       })
     },

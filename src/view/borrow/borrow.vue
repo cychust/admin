@@ -1,87 +1,6 @@
 <template>
   <div>
     <Sreach></Sreach>
-    <GoodsListNav></GoodsListNav>
-    <div class="container">
-      <div class="bread-crumb">
-        <Breadcrumb>
-          <BreadcrumbItem to="/">
-            <Icon type="ios-home-outline"></Icon> 首页
-          </BreadcrumbItem>
-          <BreadcrumbItem to="/goodsList?sreachData=">
-            <Icon type="bag"></Icon> {{sreachItem}}
-          </BreadcrumbItem>
-        </Breadcrumb>
-      </div>
-      <!-- 商品标签导航 -->
-      <GoodsClassNav></GoodsClassNav>
-      <!-- 商品展示容器 -->
-      <div class="goods-box">
-        <div class="as-box">
-          <div class="item-as-title">
-            <span>商品精选</span>
-            <span>广告</span>
-          </div>
-          <div class="item-as"
-               v-for="(item,index) in asItems"
-               :key="index">
-            <div class="item-as-img">
-              <img :src="item.img"
-                   alt="">
-            </div>
-            <div class="item-as-price">
-              <span>
-                <Icon type="social-yen text-danger"></Icon>
-                <span class="seckill-price text-danger">{{item.price}}</span>
-              </span>
-            </div>
-            <div class="item-as-intro">
-              <span>{{item.intro}}</span>
-            </div>
-            <div class="item-as-selled">
-              已有<span>{{item.num}}</span>人评价
-            </div>
-          </div>
-        </div>
-        <div class="goods-list-box">
-          <div class="goods-list-tool">
-            <ul>
-              <li v-for="(item,index) in goodsTool"
-                  :key="index"
-                  @click="orderBy(item.en, index)"><span :class="{ 'goods-list-tool-active': isAction[index]}">{{item.title}} <Icon :type="icon[index]"></Icon></span></li>
-            </ul>
-          </div>
-          <div class="goods-list">
-            <div class="goods-show-info"
-                 v-for="(item, index) in orderGoodsList"
-                 :key="index">
-              <div class="goods-show-img">
-                <router-link to="/goodsDetail"><img :src="item.img" /></router-link>
-              </div>
-              <div class="goods-show-price">
-                <span>
-                  <Icon type="social-yen text-danger"></Icon>
-                  <span class="seckill-price text-danger">{{item.price}}</span>
-                </span>
-              </div>
-              <div class="goods-show-detail">
-                <span>{{item.intro}}</span>
-              </div>
-              <div class="goods-show-num">
-                已有<span>{{item.remarks}}</span>人评价
-              </div>
-              <div class="goods-show-seller">
-                <span>{{item.shopName}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="goods-page">
-        <Page :total="100"
-              show-sizer></Page>
-      </div>
-    </div>
     <!-- <Footer></Footer> -->
     <Spin size="large"
           fix
@@ -91,10 +10,7 @@
 
 <script>
 import Sreach from './Search.vue'
-import GoodsListNav from './nav/GoodsListNav.vue'
-import GoodsClassNav from './/nav/GoodsClassNav.vue'
-// import Footer from '@/components/footer/Footer'
-import store from '@/store'
+
 import { mapState, mapActions, mapGetters, mapMutations } from 'vuex'
 export default {
   name: 'GoodsList',
@@ -133,12 +49,10 @@ export default {
     this.sreachItem = this.$route.query.sreachData
   },
   components: {
-    Sreach,
-    GoodsListNav,
-    GoodsClassNav
+    Sreach
+
     // Footer
-  },
-  store
+  }
 }
 </script>
 

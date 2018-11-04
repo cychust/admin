@@ -23,6 +23,15 @@ export const getSearchData = (keyword) => {
   })
 }
 
+/// get all messages
+
+export const getAllMessages = () => {
+  return axios.request({
+    url: 'http://localhost:9966/api/allMessages',
+    method: 'get'
+  })
+}
+
 // user api
 
 export const registerUser = (tableData) => {

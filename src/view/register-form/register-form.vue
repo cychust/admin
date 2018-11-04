@@ -96,13 +96,13 @@ import {registerUser} from '@/api/data'
 export default {
   name: 'type',
   data () {
-    const validateemailId = (rule, value, callback) => {
-      if (value.toString().length !== 15 && value.toString().length !== 18) {
-        // callback(new Error('请输入正确的营业执照注册号'))
-      } else {
-        callback()
-      }
-    }
+    // const validateemailId = (rule, value, callback) => {
+    //   if (value.toString().length !== 15 && value.toString().length !== 18) {
+    //     // callback(new Error('请输入正确的营业执照注册号'))
+    //   } else {
+    //     callback()
+    //   }
+    // }
     const ensurePass = (rule, value, callback) => {
       if (value.toString() !== this.formCustom.password) {
         callback(new Error('两次输入密码不一样'))
@@ -138,10 +138,12 @@ export default {
         ],
         email: [
           {required: true, message: '邮箱不能为空不能为空', trigger: 'blur'},
-          {validator: validateemailId, trigger: 'blur'}
+          {trigger: 'blur'}
         ],
+
         password: [
           {required: true, message: '登录密码不能为空', trigger: 'blur'},
+          // eslint-disable-next-line
           {message: '密码格式不对', trigger: 'blur', pattern: /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/ }
         ],
         ensurePassword: [
