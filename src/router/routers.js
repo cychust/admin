@@ -20,6 +20,32 @@ export default [{
     },
     component: () =>
       import('@/view/login/login.vue')
+  },
+  {
+    path: '/userInfo',
+    name: 'userInfo',
+    meta: {
+      title: 'Login - 登录',
+      hideInMenu: true
+    },
+    component: () =>
+      import('@/view/borrow/userInfo.vue'),
+    children: [{
+        path: 'myOrder',
+        name: 'MyOrder',
+        component: () => import('@/view/borrow/myOrder.vue')
+      },
+      {
+        path: 'user',
+        name: 'user',
+        component: () => import('@/view/borrow/user.vue')
+      },
+      {
+        path: 'returnBook',
+        name: 'returnBook',
+        component: () => import('@/view/borrow/returnBook.vue')
+      },
+    ]
   }, {
     path: '/BookDetail',
     name: 'BookDetail',

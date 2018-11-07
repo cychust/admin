@@ -42,12 +42,12 @@
               <div class="my-page">
                 <div class="my-info"
                      @click="myInfo">
-                  <Icon type="home"></Icon>
+                  <Icon type="ios-home"></Icon>
                   <p>我的主页</p>
                 </div>
                 <div class="sign-out"
                      @click="signOutFun">
-                  <Icon type="log-out"></Icon>
+                  <Icon type="ios-log-out"></Icon>
                   <p>退出登陆</p>
                 </div>
               </div>
@@ -56,13 +56,13 @@
         </li>
 
         <li>
-          <router-link to="/">网站导航</router-link>
+          <router-link to="#">网站导航</router-link>
         </li>
         <li>
-          <router-link to="/freeback">意见反馈</router-link>
+          <router-link to="#">意见反馈</router-link>
         </li>
         <li>
-          <router-link to="/">商城首页</router-link>
+          <router-link to="/borrow">商城首页</router-link>
         </li>
       </ul>
     </div>
@@ -72,6 +72,7 @@
 <script>
 
 // import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex'
 export default {
   name: 'M-Header',
   created () {
@@ -87,7 +88,7 @@ export default {
         ['西藏', '陕西', '甘肃', '青海', '珠海']
       ],
       userInfo: {
-        username: ''
+        username: 'cyc'
       }
     }
   },
@@ -95,6 +96,9 @@ export default {
     // ...mapState(['userInfo', 'shoppingCart'])
   },
   methods: {
+    ...mapActions([
+      'handleLogOut'
+    ]),
     changeCity (city) {
       this.city = city
     },
@@ -102,11 +106,14 @@ export default {
       this.$router.push('/order')
     },
     myInfo () {
-      this.$router.push('/home')
+      this.$router.push('/userInfo')
     },
     signOutFun () {
-      this.signOut()
-      this.$router.push('/')
+      this.handleLogOut().then(() => {
+        this.$router.push({
+          name: 'login'
+        })
+      })
     }
   }
   // store

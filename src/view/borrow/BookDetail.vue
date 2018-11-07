@@ -24,6 +24,41 @@
           <p>
             <span class="item-detail-express">校园配送</span> {{goodsInfo.title}}</p>
         </div>
+        <div class="item-detail-price-row">
+          <div class="item-price-left">
+            <div class="item-price-row">
+              <p>
+                <span class="item-price-title">书籍作者</span>
+                <span class="item-price">{{price.toFixed(2)}}</span>
+              </p>
+            </div>
+            <div class="item-price-row">
+              <p>
+                <span class="item-price-title">书籍页数</span>
+                <span class="item-price">{{price.toFixed(2)}}</span>
+              </p>
+            </div>
+            <div class="item-price-row">
+              <p>
+                <span class="item-price-title">出版社　</span>
+                <span class="item-price">{{price.toFixed(2)}}</span>
+              </p>
+            </div>
+          </div>
+          <div class="item-price-right">
+            <div class="item-remarks-sum">
+              <p>累计出借</p>
+              <p>
+                <span class="item-remarks-num">{{goodsInfo.remarksNum}} 条</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <p v-if="!isBorrowed"
+           class="item-price">书　已　被　借</p>
+        <Button type="primary"
+                shape="circle"
+                class="borrow_btn">借书</Button>
       </div>
     </div>
   </div>
@@ -37,11 +72,13 @@ export default {
   name: 'BookDetail',
   data () {
     return {
+
       goodsInfo: {},
       price: 0,
       count: 1,
       selectBoxIndex: 0,
-      imgIndex: 0
+      imgIndex: 0,
+      isBorrowed: false
     }
   },
   methods: {
@@ -82,6 +119,9 @@ export default {
 </script>
 
 <style scoped>
+.borrow_btn {
+  margin-top: 100px;
+}
 .contrainer {
   width: 80%;
   margin: 15px auto;
@@ -140,7 +180,8 @@ export default {
 }
 /*价格详情等*/
 .item-detail-price-row {
-  padding: 5px;
+  margin-top: 30px;
+  padding: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
