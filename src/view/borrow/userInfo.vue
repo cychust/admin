@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div>
 
     <Head></Head>
     <Layout class="layout">
@@ -15,7 +15,7 @@
             <div class="user-img">
               <img src="https://github.com/cychust/admin/raw/master/static/img/head.png">
             </div>
-            <p>Gavin</p>
+            <p>Yichao Chen</p>
           </div>
           <Submenu name="1">
             <template slot="title">
@@ -52,7 +52,7 @@
             <router-view></router-view>
           </transition>
         </Content>
-        <Footer class="layout-footer-center">2018 &copy; Gavin</Footer>
+        <Footer class="layout-footer-center">2018 &copy; Yichao Chen</Footer>
       </Layout>
     </Layout>
   </div>
@@ -109,10 +109,14 @@ export default {
 .user-img img {
   width: 100%;
 }
+.layout {
+  overflow: auto;
+}
 .content {
   margin: 15px;
   background-color: #fff;
   padding: 15px;
+  overflow-y: auto;
 }
 .layout-footer-center {
   padding: 0px 15px;

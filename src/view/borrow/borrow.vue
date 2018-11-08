@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="borrow">
     <div class="contrainer">
       <Header></Header>
       <Search></Search>
@@ -85,6 +85,7 @@
 <script>
 import Header from './Header'
 import Search from './Search'
+import Footer from './Footer'
 // import Footer from './Footer'
 import { loadComputerList, loadFavoriteList } from '@/api/data'
 export default {
@@ -116,16 +117,21 @@ export default {
   },
   components: {
     Search,
-    Header
+    Header,
     // BookList,
-    // Footer
+    Footer
   }
 }
 </script>
 
 <style scoped>
+.borrow {
+  overflow: auto;
+  height: 100%;
+}
 .container {
   background-color: #f6f6f6;
+  height: 100hv;
 }
 .content {
   width: 1008px;
@@ -326,6 +332,8 @@ export default {
   float: left;
 }
 .item-big-img img {
+  width: 100%;
+  height: 100%;
   margin-left: 0px;
   transition: margin-left 0.3s;
 }

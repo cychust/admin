@@ -345,3 +345,13 @@ export const adminListDataMerge = (data) => {
   // delete adminData[0]
   return adminData
 }
+
+export const timeFormat = (date) => {
+  let year = date.getFullYear()
+  let month = date.getMonth() + 1
+  let day = date.getDate()
+  let hour = date.getHours()
+  let minute = date.getMinutes()
+  let second = date.getSeconds()
+  return year + '-' + month + '-' + day + '||' + hour + ':' + minute + ':' + second
+}

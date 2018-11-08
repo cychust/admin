@@ -62,7 +62,7 @@
           <router-link to="#">意见反馈</router-link>
         </li>
         <li>
-          <router-link to="/borrow">商城首页</router-link>
+          <router-link to="/borrow">图书馆首页</router-link>
         </li>
       </ul>
     </div>

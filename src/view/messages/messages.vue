@@ -34,7 +34,7 @@
     </Row>
     <Row style="margin-top: 20px;">
       <Card shadow>
-        <!-- <example style="height: 310px;"/> -->
+        <example style="height: 310px;" />
       </Card>
     </Row>
   </div>
@@ -45,15 +45,15 @@ import InforCard from '_c/info-card'
 import CountTo from '_c/count-to'
 import { ChartPie, ChartBar } from '_c/charts'
 import {getAllMessages} from '@/api/data'
-// import Example from './example.vue'
+import Example from '../single-page/home/example.vue'
 export default {
   name: 'messages',
   components: {
     InforCard,
     CountTo,
     ChartPie,
-    ChartBar
-    // Example
+    ChartBar,
+    Example
   },
   data () {
     return {

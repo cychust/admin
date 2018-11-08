@@ -5,19 +5,19 @@
       <div class="icon-row">
         <div class="footer-icon">
           <h5 class="footer-icon-child"></h5>
-          <span class="footer-icon-text">品类齐全，轻松购物</span>
+          <span class="footer-icon-text">　图　书　馆</span>
         </div>
         <div class="footer-icon">
           <h5 class="footer-icon-child footer-icon-child-2"></h5>
-          <span class="footer-icon-text">多仓直发，极速配送</span>
+          <span class="footer-icon-text">　　　　校　史　馆</span>
         </div>
         <div class="footer-icon">
           <h5 class="footer-icon-child footer-icon-child-3"></h5>
-          <span class="footer-icon-text">正品行货，精致服务</span>
+          <span class="footer-icon-text">　　　　师生服务中心</span>
         </div>
         <div class="footer-icon">
           <h5 class="footer-icon-child footer-icon-child-4"></h5>
-          <span class="footer-icon-text">天天低价，畅选无忧</span>
+          <span class="footer-icon-text">　　　华中大微校园</span>
         </div>
       </div>
       <div class="service-intro">
@@ -44,7 +44,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="copyright">
-          <p>Copyright © 2018 by Gavin <a href="https://github.com/PowerDos">
+          <p>Copyright © 2018 by Yichao Chen <a href="https://github.com/PowerDos">
               <Icon type="social-github"></Icon>
             </a> <span>本项目仅供学习参考</span></p>
         </div>
@@ -60,10 +60,10 @@ export default {
     return {
       linkItemClass: 'link-item',
       guideArr: [
-        [ '购物指南', '购物流程', '会员介绍', '生活旅行', '常见问题', '大家电', '联系客服' ],
-        [ '配送方式', '上门自提', '211限时达', '配送服务查询', '收取标准', '海外配送' ],
-        [ '支付方式', '货到付款', '在线支付', '分期付款', '邮局汇款', '公司转账' ],
-        [ '售后服务', '售后政策', '价格保护', '退款说明', '返修/退换货', '取消订单' ]
+        [ '借书指南', '借书流程', '管理员介绍', '常见问题', '联系管理员' ],
+        [ '预约指南', '电话预约', '邮箱预约', '预约流程', '预约须知' ],
+        [ '参观须知', '电话预约', '邮箱预约', '预约流程', '预约须知' ],
+        [ '售后服务', '电话预约', '邮箱预约', '预约流程', '预约须知' ]
       ],
       moreLink: [
         '关于我们', '联系我们', '联系客服', '合作招商', '商家帮助', '营销中心', '销售联盟', '校园社区', '风险监测', '隐私政策'

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bookDetail">
     <Header></Header>
     <Search></Search>
     <div class="contrainer">
@@ -139,6 +139,10 @@ export default {
 </script>
 
 <style scoped>
+.bookDetail {
+  overflow: auto;
+  height: 100%;
+}
 .book-status {
   color: #e4393c;
   font-size: 23px;

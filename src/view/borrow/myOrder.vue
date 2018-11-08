@@ -4,7 +4,7 @@
            :columns="columns"
            :data="order"
            size="large"
-           no-data-text="你还有订单，快点去购物吧"></Table>
+           no-data-text="你还有借书记录，快点去借书吧"></Table>
     <div class="page-size">
       <Page :total="100"
             show-sizer></Page>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { orderLists, addOrder, updateOrder } from '@/api/data'
+import { orderLists } from '@/api/data'
 export default {
   name: 'MyOrder',
   data () {
@@ -105,6 +105,8 @@ export default {
       this.order.forEach((item) => {
         if (!item.isFinished) {
           item.isFinished = '否'
+        } else {
+          item.isFinished = '是'
         }
         item.img = 'https://github.com/cychust/admin/raw/master/static/img/goodsDetail/pack/1.jpg'
       })

@@ -1,10 +1,10 @@
 <template>
   <div>
-    <Table border
-           :columns="columns"
-           :data="order"
-           size="large"
-           no-data-text="你还有订单，快点去购物吧"></Table>
+    <Tables border
+            :columns="columns"
+            v-model="order"
+            size="large"
+            no-data-text="你还没有借书记录，快点去借书吧"></Tables>
     <div class="page-size">
       <Page :total="100"
             show-sizer></Page>
@@ -13,28 +13,35 @@
 </template>
 
 <script>
-import { orderLists, addOrder, updateOrder } from '@/api/data'
+import Tables from '_c/tables'
+import { orderListsBy, addOrder, returnBookApi } from '@/api/data'
+// import { timeFormat } from '@/libs/util'
 export default {
   name: 'MyOrder',
+  components: {
+    Tables
+  },
   data () {
     return {
-      order: [{
-        // orderId: this.tableData.length + 1,
-        // isbn: 1,
-        // bookName: '计算机科学与技术',
-        // createTime: new Date(),
-        // orderUsername: 'cyc',
-        // finishedTime: new Date(),
-        // isFinished: '否'
-        orderId: 1529931938150,
-        isbn: 1529931938150,
-        bookName: '计算机',
-        img: 'https://github.com/cychust/admin/raw/master/static/img/goodsDetail/pack/1.jpg',
-        orderUsername: '4.7英寸-深邃蓝',
-        finishedTime: 28,
-        isFinished: '否',
-        createTime: '2018-06-06 20:06:08'
-      }],
+      order: [
+        // {
+      //   // orderId: this.tableData.length + 1,
+      //   // isbn: 1,
+      //   // bookName: '计算机科学与技术',
+      //   // createTime: new Date(),
+      //   // orderUsername: 'cyc',
+      //   // finishedTime: new Date(),
+      //   // isFinished: '否'
+      //   orderId: 1529931938150,
+      //   isbn: 1529931938150,
+      //   bookName: '计算机',
+      //   img: 'https://github.com/cychust/admin/raw/master/static/img/goodsDetail/pack/1.jpg',
+      //   orderUsername: '4.7英寸-深邃蓝',
+      //   finishedTime: 28,
+      //   isFinished: '否',
+      //   createTime: '2018-06-06 20:06:08'
+      // }
+      ],
       columns: [
         {
           title: '订单号',
@@ -82,10 +89,32 @@ export default {
           align: 'center'
         },
         {
-          title: '还书日期',
+          title: '还书',
           width: 198,
-          key: 'finishedTime',
-          align: 'center'
+          key: 'handle',
+          align: 'center',
+          button: [
+            (h, params) => {
+              return h('Poptip', {
+                props: {
+                  confirm: true,
+                  title: '你确定要还书吗?',
+                  transfer: true
+                },
+                on: {
+                  'on-ok': () => {
+                    console.error(params.index)
+                    this.returnBook(params.index)
+                  }
+                }
+              }, [
+                h('Button', {
+                  props: {'type': 'primary', 'size': 'small'},
+                  style: {'margin': '3px'}
+                },
+                '一键还书')
+              ])
+            } ]
         },
         {
           title: '订单是否完成',
@@ -97,10 +126,17 @@ export default {
     }
   },
   methods: {
-
+    returnBook (index) {
+      returnBookApi(this.order[index]).then((res) => {
+        this.order.splice(index, 1)
+        this.$Message.success('还书成功')
+      }).catch(err => {
+        throw err
+      })
+    }
   },
   mounted () {
-    orderLists().then(result => {
+    orderListsBy('cyc').then(result => {
       this.order = result.data.data
       this.order.forEach((item) => {
         if (!item.isFinished) {

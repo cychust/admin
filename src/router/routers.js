@@ -24,6 +24,7 @@ export default [{
   {
     path: '/userInfo',
     name: 'userInfo',
+    redirect: '/userInfo/user',
     meta: {
       title: 'Login - 登录',
       hideInMenu: true

@@ -8,31 +8,40 @@
                 icon="ios-person"
                 size="large"
                 :style="{ width:'100px',height:'100px' }" />
-        <p>用户姓名： {{user.username}}</p>
-        <p>用户姓名： {{user.username}}</p>
-        <p>用户姓名： {{user.username}}</p>
-        <p>用户姓名： {{user.username}}</p>
-        <p>用户姓名： {{user.username}}</p>
-        <p>用户姓名： {{user.username}}</p>
+
+        <Divider></Divider>
+        <div class="message">
+          <div class="message-left">
+            <p>用户ID：</p>
+            <p>用户姓名：</p>
+            <p>用户邮箱：</p>
+            <!-- <p>用户密码：</p> -->
+          </div>
+          <div class="message-right">
+            <p> {{user.username}}</p>
+            <p>{{user.userId}}</p>
+            <p>{{user.email}}</p>
+            <!-- <p>{{user.username}}</p> -->
+          </div>
+        </div>
+        <Button type="error"
+                class="btn_float">修改用户信息</Button>
       </Card>
     </div>
-    <Divider></Divider>
-    <ReturnBook></ReturnBook>
   </div>
 </template>
 
 <script>
-import ReturnBook from './returnBook'
 import { orderLists, addOrder, updateOrder } from '@/api/data'
 export default {
   name: 'MyOrder',
-  components: {
-    ReturnBook
-  },
   data () {
     return {
       user: {
-        username: 'cyc'
+        userId: 1,
+        username: 'cyc',
+        email: '121@qq.com'
+
       },
       order: [{
         // orderId: this.tableData.length + 1,
@@ -131,14 +140,38 @@ export default {
 </script>
 
 <style scoped>
+.btn_float {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+}
+.message {
+  /* position: relative; */
+  /* padding-left: auto; */
+  /* padding-right: auto; */
+  text-align: center;
+}
+.message-left p {
+  margin-top: 100px;
+}
+.message-left {
+  display: inline-block;
+  text-align: right;
+}
+.message-right {
+  text-align: left;
+  display: inline-block;
+}
 .user {
   position: relative;
   /* margin: 0; */
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  overflow: auto;
 }
 .card {
+  height: 500px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
