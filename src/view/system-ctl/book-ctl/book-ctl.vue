@@ -44,6 +44,7 @@ export default {
         {title: '出版社', key: 'publish_horse', sortable: true, editable: true},
         {title: '出版日期', key: 'publish_date', sortable: true, editable: true},
         {title: '书籍页数', key: 'page_number', sortable: true, editable: true},
+        {title: '是否被借', key: 'borrowed', sortable: true, editable: true},
         {title: '备注信息', key: 'remarks', sortable: false, editable: true},
         // {title: '出版日期', key: 'updateTime', sortable: true},
         {
@@ -130,6 +131,7 @@ export default {
         publish_horse: '华中科技大学出版社',
         publish_date: new Date(),
         page_number: '111',
+        borrowed: '否',
         remarks: '无'
       }
       this.tableData.push(initData)
@@ -139,7 +141,7 @@ export default {
     },
     save (index) {
       if (this.tableData[index].id == null || this.tableData[index].book_name == null) {
-        this.$Message.error('保存失败')
+        this.$Message.error('书籍编号和书名必填')
       } else {
         const tableData = {
           id: this.tableData[index].id,
@@ -152,7 +154,8 @@ export default {
           remarks: this.tableData[index].remarks
         }
         insertBook(tableData).then(res => {
-          if (res.data.code === '300') { this.$Message.error('书籍已存在') } else { this.$Message.success('保存成功') }
+          console.error(res.data.code)
+          if (res.data.code == '300') { this.$Message.error('书籍已存在,保存失败') } else { this.$Message.success('保存成功') }
         }).catch(err => {
           console.error(err)
         })
@@ -210,6 +213,8 @@ export default {
               h('Divider'),
               h('div', [`书籍页数：${this.tableData[index].page_number}`]),
               h('Divider'),
+              h('div', [`是否被借：${this.tableData[index].borrowed}`]),
+              h('Divider'),
               h('div', [`备注信息：${this.tableData[index].remarks}`])
             ])])
         }
@@ -220,6 +225,13 @@ export default {
     getTableBookData().then(result => {
       console.error(result.data.data)
       this.tableData = result.data.data
+      this.tableData.forEach((item) => {
+        if (item.borrowed === false) {
+          item.borrowed = '否'
+        } else {
+          item.borrowed = '是'
+        }
+      })
     })
   }
 }

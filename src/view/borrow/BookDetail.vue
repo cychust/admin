@@ -22,26 +22,26 @@
       <div class="item-detail-right">
         <div class="item-detail-title">
           <p>
-            <span class="item-detail-express">校园配送</span> {{goodsInfo.title}}</p>
+            <span class="item-detail-express">校园配送</span> {{bookInfo.bookName}}</p>
         </div>
         <div class="item-detail-price-row">
           <div class="item-price-left">
             <div class="item-price-row">
               <p>
                 <span class="item-price-title">书籍作者</span>
-                <span class="item-price">{{price.toFixed(2)}}</span>
+                <span class="item-price">{{bookInfo.authorName}}</span>
               </p>
             </div>
             <div class="item-price-row">
               <p>
                 <span class="item-price-title">书籍页数</span>
-                <span class="item-price">{{price.toFixed(2)}}</span>
+                <span class="item-price">{{bookInfo.pageNumber}}</span>
               </p>
             </div>
             <div class="item-price-row">
               <p>
                 <span class="item-price-title">出版社　</span>
-                <span class="item-price">{{price.toFixed(2)}}</span>
+                <span class="item-price">{{bookInfo.publishHorse}}</span>
               </p>
             </div>
           </div>
@@ -54,11 +54,13 @@
             </div>
           </div>
         </div>
-        <p v-if="!isBorrowed"
-           class="item-price">书　已　被　借</p>
+        <p v-if="isBorrowed"
+           class="book-status">书　已　被　借</p>
         <Button type="primary"
                 shape="circle"
-                class="borrow_btn">借书</Button>
+                class="borrow_btn"
+                @click="borrowBook()"
+                :disabled="isBorrowed">借书</Button>
       </div>
     </div>
   </div>
@@ -67,13 +69,15 @@
 <script>
 import Header from './Header'
 import Search from './Search'
-import {loadGoodsInfo} from '@/api/data'
+import {loadGoodsInfo, loadBookInfo, mergeBookInfo, borrowBookApi} from '@/api/data'
 export default {
   name: 'BookDetail',
   data () {
     return {
-
+      id: 2,
+      username: 'cyc',
       goodsInfo: {},
+      bookInfo: {},
       price: 0,
       count: 1,
       selectBoxIndex: 0,
@@ -82,6 +86,12 @@ export default {
     }
   },
   methods: {
+    borrowBook () {
+      borrowBookApi(this.bookInfo).then((res) => {
+        this.isBorrowed = true
+        this.$Message.info('成功')
+      })
+    },
     select (index1, index2) {
       this.selectBoxIndex = index1 * 3 + index2
       this.price = this.goodsInfo.setMeal[index1][index2].price
@@ -107,6 +117,16 @@ export default {
   mounted () {
     loadGoodsInfo().then((result) => {
       this.goodsInfo = result
+    })
+    loadBookInfo(this.id).then((result) => {
+      console.error(result.data.data)
+      mergeBookInfo(result.data.data).then((res) => {
+        // console.error(res)
+        this.bookInfo = res
+        this.isBorrowed = res.is_borrowed
+        console.error(this.bookInfo)
+      })
+      // console.error(this.bookInfo)
     }).catch((err) => {
       throw err
     })
@@ -119,6 +139,15 @@ export default {
 </script>
 
 <style scoped>
+.book-status {
+  color: #e4393c;
+  font-size: 23px;
+  cursor: pointer;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 .borrow_btn {
   margin-top: 100px;
 }
