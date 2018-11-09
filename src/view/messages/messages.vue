@@ -21,7 +21,7 @@
         <Card shadow>
           <chart-pie style="height: 300px;"
                      :value="pieData"
-                     text="用户访问来源"></chart-pie>
+                     text="图书馆书籍类型比例"></chart-pie>
         </Card>
       </i-col>
       <i-col span="16">

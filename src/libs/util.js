@@ -338,7 +338,8 @@ export const adminListDataMerge = (data) => {
     var item = {
       'id': value.id,
       'username': value.username,
-      'roles': allRoles
+      'roles': allRoles,
+      'create_time': value.create_time
     }
     adminData.push(item)
   })

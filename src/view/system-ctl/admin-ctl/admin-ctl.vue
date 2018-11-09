@@ -20,8 +20,9 @@
 </template>
 <script>
 import Tables from '_c/tables'
-import { getAdminListData } from '@/api/data'
-import { adminListDataMerge } from '@/libs/util'
+import { getAdminListData, upgrade, degrade } from '@/api/data'
+import { adminListDataMerge, timeFormat } from '@/libs/util'
+
 export default {
   components: {
     Tables
@@ -35,7 +36,7 @@ export default {
         {title: 'ID', key: 'id', sortable: true},
         {title: '角色名称', key: 'username', sortable: true, editable: true},
         {title: '权限', key: 'roles', editable: true},
-        {title: '创建时间', key: 'createTime', editable: true},
+        {title: '创建时间', key: 'create_time', editable: true},
         {
           title: 'Handle',
           key: 'handle',
@@ -49,6 +50,16 @@ export default {
                     this.show(params.index)
                   }
                 }}, '查看')
+            },
+            (h, params) => {
+              return h('Button', {
+                props: {'type': 'primary'},
+                on: {
+                  click: () => {
+                    // this.show(params.index)
+                    this.updateRole(params.index)
+                  }
+                }}, '修改权限')
             },
             (h, params, vm) => {
               return h('Poptip', {
@@ -81,12 +92,22 @@ export default {
         filename: `table-${(new Date()).valueOf()}.csv`
       })
     },
+    updateRole (index) {
+      console.error(this.tableData[index].roles)
+      if (this.tableData[index].roles == 'MEMBER') {
+        upgrade(this.tableData[index].id)
+        this.tableData[index].roles = "['ADMIN']"
+      } else {
+        degrade(this.tableData[index].id)
+        this.tableData[index].roles = "['MEMBER']"
+      }
+    },
     addAdmin () {
       const initData = {
         id: this.tableData.length + 1,
         username: 'ccc',
         access: ['super_admin', 'admin'],
-        createTime: new Date()
+        create_time: timeFormat(new Date())
       }
       this.tableData.push(initData)
     },

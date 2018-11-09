@@ -64,6 +64,20 @@ export const getAdminListData = () => {
   })
 }
 
+export const upgrade = (id) => {
+  return axios.request({
+    url: 'http://localhost:9966/api/user/upgrade?id=' + id,
+    method: 'get'
+  })
+}
+
+export const degrade = (id) => {
+  return axios.request({
+    url: 'http://localhost:9966/api/user/degrade?id=' + id,
+    method: 'get'
+  })
+}
+
 // order api
 export const updateOrder = (orderId, finishedTime) => {
   return axios.request({
@@ -151,64 +165,61 @@ export const getTableBookData = () => {
 export const loadComputerList = () => {
   return new Promise((resolve, reject) => {
     const computer = {
-      title: '电脑数码',
+      title: '计算机相关书籍',
       link: ['电脑馆', '游戏极品', '装机大师', '职场焕新', '女神频道', '虚拟现实', '二合一平板', '电子教育', '万物周刊'],
       detail: [{
-        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng',
+        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
         itemFour: [{
-          title: '电脑馆',
-          intro: '笔记本999元限量秒！',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng'
+          title: '计算机网络',
+
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '外设装备',
-          intro: '1000减618',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng'
+          title: '算法导论',
+
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '电脑配件',
-          intro: '联合满减最高省618',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng'
+          title: 'Vue.js实战',
+
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '办公生活',
-          intro: '5折神券 精品文具',
+          title: '计算机操作系统',
+
           img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-1-5.jpg'
         }
         ],
         itemContent: [
-          'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-1-6.jpg',
-          'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-1-7.jpg',
-          'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-1-8.jpg'
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         ]
       },
       {
-        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-2-1.jpg',
+        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
         itemFour: [{
-          title: '平板电脑',
-          intro: '爆款平板12期免息',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-2-2.jpg'
+          title: '计算机组成原理',
+
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '智能酷玩',
-          intro: '抢999减666神券',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-2-3.jpg'
+          title: 'Spring 微服务实战',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '娱乐影音',
-          intro: '大牌耳机低至5折',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-2-4.jpg'
+          title: '深入理解JavaScript',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '摄影摄像',
-          intro: '大牌相机5折抢',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-2-5.jpg'
+          title: 'Unix学习',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         }
         ],
         itemContent: [
-          'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-2-6.jpg',
-          'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-2-7.jpg',
-          'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-2-8.jpg'
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         ]
       }
       ]
@@ -221,64 +232,64 @@ export const loadComputerList = () => {
 export const loadFavoriteList = () => {
   return new Promise((resolve, reject) => {
     const eat = {
-      title: '爱吃',
-      link: ['休闲零食', '坚果', '牛奶', '饮料冲调', '食用油', '大米', '白酒', '红酒', '烧烤食材', '牛排', '樱桃'],
+      title: '其他',
+      // link: ['休闲零食', '坚果', '牛奶', '饮料冲调', '食用油', '大米', '白酒', '红酒', '烧烤食材', '牛排', '樱桃'],
       detail: [{
-        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-1-1.jpg',
+        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
         itemFour: [{
-          title: '粮油调味',
-          intro: '买2免1',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-1-2.jpg'
+          title: '软件工程',
+          // intro: '买2免1',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '饮料冲调',
-          intro: '第二件半价',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-1-3.jpg'
+          title: '软件工程',
+          // intro: '第二件半价',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '休闲零食',
-          intro: '满99减40',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-1-4.jpg'
+          title: '软件工程',
+          // intro: '满99减40',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '中外名酒',
-          intro: '满199减100',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-1-5.jpg'
+          title: '软件工程',
+          // intro: '满199减100',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         }
         ],
         itemContent: [
-          'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-1-6.jpg',
-          'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-1-7.jpg',
-          'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-1-8.jpg'
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         ]
       },
       {
-        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-2-1.jpg',
+        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
         itemFour: [{
-          title: '东家菜',
-          intro: '丰富好味',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-2-2.jpg'
+          title: '软件工程',
+          // intro: '丰富好味',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '东家菜',
-          intro: '丰富好味',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-2-2.jpg'
+          title: '软件工程',
+          // intro: '丰富好味',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '东家菜',
-          intro: '丰富好味',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-2-2.jpg'
+          title: '软件工程',
+          // intro: '丰富好味',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         },
         {
-          title: '东家菜',
-          intro: '丰富好味',
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-2-2.jpg'
+          title: '软件工程',
+          // intro: '丰富好味',
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         }
         ],
         itemContent: [
-          'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-2-6.jpg',
-          'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-2-7.jpg',
-          'https://github.com/cychust/admin/raw/master/static/img/index/eat/item-eat-2-8.jpg'
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+          'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
         ]
       }
       ]
