@@ -16,12 +16,26 @@ export const getDragList = () => {
   })
 }
 
+// export const getSearchData = (keyword) => {
+//   // console.error('in1')
+//   return axios.request({
+//     url: 'https://sug.so.360.cn/suggest?word=' + keyword + '&encodein=utf-8&encodeout=utf-8'
+//     // method: 'get'
+//     // withCredentials: false
+//   })
+// }
+
 export const getSearchData = (keyword) => {
   // console.error('in1')
   return axios.request({
-    url: 'https://sug.so.360.cn/suggest?word=' + keyword + '&encodein=utf-8&encodeout=utf-8'
-    // method: 'get'
-    // withCredentials: false
+    url: 'http://localhost:9966/api/search/suggestion?tips=' + keyword,
+    method: 'get'
+  })
+}
+export const getSearchResult = (keyword) => {
+  return axios.request({
+    url: 'http://localhost:9966/api/search?wd=' + keyword,
+    method: 'get'
   })
 }
 
