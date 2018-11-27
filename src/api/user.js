@@ -14,7 +14,7 @@ export const login = ({
   // console.error('1111111')
   // console.error(data)
   return axios.request({
-    url: 'http://localhost:9966/api/auth/login',
+    url: 'http://47.106.202.38:8010/api/auth/login',
     data,
     method: 'post'
   })

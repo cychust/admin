@@ -25,16 +25,16 @@ export const getDragList = () => {
 //   })
 // }
 
-export const getSearchData = (keyword) => {
+export const getSearchData = keyword => {
   // console.error('in1')
   return axios.request({
-    url: 'http://localhost:9966/api/search/suggestion?tips=' + keyword,
+    url: 'http://47.106.202.38:8010/api/search/suggestion?tips=' + keyword,
     method: 'get'
   })
 }
-export const getSearchResult = (keyword) => {
+export const getSearchResult = keyword => {
   return axios.request({
-    url: 'http://localhost:9966/api/search?wd=' + keyword,
+    url: 'http://47.106.202.38:8010/api/search?wd=' + keyword,
     method: 'get'
   })
 }
@@ -43,37 +43,42 @@ export const getSearchResult = (keyword) => {
 
 export const getAllMessages = () => {
   return axios.request({
-    url: 'http://localhost:9966/api/allMessages',
+    url: 'http://47.106.202.38:8010/api/allMessages',
     method: 'get'
   })
 }
 
 // user api
 
-export const registerUser = (tableData) => {
+export const registerUser = tableData => {
   return axios.request({
-    url: 'http://localhost:9966/api/register?username=' + tableData.userName + '&password=' + tableData.password + '&email=' + tableData.email,
+    url: 'http://47.106.202.38:8010/api/register?username=' +
+      tableData.userName +
+      '&password=' +
+      tableData.password +
+      '&email=' +
+      tableData.email,
     method: 'post'
   })
 }
 
 export const getAdminListData = () => {
   return axios.request({
-    url: 'http://localhost:9966/api/userList',
+    url: 'http://47.106.202.38:8010/api/userList',
     method: 'get'
   })
 }
 
-export const upgrade = (id) => {
+export const upgrade = id => {
   return axios.request({
-    url: 'http://localhost:9966/api/user/upgrade?id=' + id,
+    url: 'http://47.106.202.38:8010/api/user/upgrade?id=' + id,
     method: 'get'
   })
 }
 
-export const degrade = (id) => {
+export const degrade = id => {
   return axios.request({
-    url: 'http://localhost:9966/api/user/degrade?id=' + id,
+    url: 'http://47.106.202.38:8010/api/user/degrade?id=' + id,
     method: 'get'
   })
 }
@@ -81,24 +86,27 @@ export const degrade = (id) => {
 // order api
 export const updateOrder = (orderId, finishedTime) => {
   return axios.request({
-    url: 'http://localhost:9966/api/updateOrder?order_id=' + orderId + '&finished_time=' + finishedTime,
+    url: 'http://47.106.202.38:8010/api/updateOrder?order_id=' +
+      orderId +
+      '&finished_time=' +
+      finishedTime,
     method: 'put'
   })
 }
 
 export const orderLists = () => {
   return axios.request({
-    url: 'http://localhost:9966/api/orderList',
+    url: 'http://47.106.202.38:8010/api/orderList',
     method: 'get'
   })
 }
 
-export const orderListsBy = (username) => {
+export const orderListsBy = username => {
   let params = {
     orderUsername: username
   }
   return axios.request({
-    url: 'http://localhost:9966/api/returnBookList',
+    url: 'http://47.106.202.38:8010/api/returnBookList',
     method: 'put',
     params: params
   })
@@ -106,7 +114,14 @@ export const orderListsBy = (username) => {
 
 export const addOrder = (isbn, bookName, orderUsername, createTime) => {
   return axios.request({
-    url: 'http://localhost:9966/api/addOrder?isbn=' + isbn + '&book_name=' + bookName + '&order_username=' + orderUsername + '&create_time=' + createTime,
+    url: 'http://47.106.202.38:8010/api/addOrder?isbn=' +
+      isbn +
+      '&book_name=' +
+      bookName +
+      '&order_username=' +
+      orderUsername +
+      '&create_time=' +
+      createTime,
     method: 'post'
   })
 }
@@ -115,38 +130,54 @@ export const addOrder = (isbn, bookName, orderUsername, createTime) => {
 
 export const bookList = () => {
   return axios.request({
-    url: 'http://localhost:9966/api/bookList',
+    url: 'http://47.106.202.38:8010/api/bookList',
     method: 'get'
   })
 }
 
 export const bookHorseList = () => {
   return axios.request({
-    url: 'http://localhost:9966/api/bookHorseList',
+    url: 'http://47.106.202.38:8010/api/bookHorseList',
     method: 'get'
   })
 }
 
 export const updateBook = (bookName, id) => {
   return axios.request({
-    url: 'http://localhost:9966/api/bookList/updateBook?bookName=' + bookName + '&id=' + id,
+    url: 'http://47.106.202.38:8010/api/bookList/updateBook?bookName=' +
+      bookName +
+      '&id=' +
+      id,
     method: 'put'
   })
 }
 
-export const insertBook = (tableData) => {
+export const insertBook = tableData => {
   return axios.request({
-    url: 'http://localhost:9966/api/bookList/insertBook?isbn=' + tableData.id + '&bookName=' +
-      tableData.bookName + '&bookCategory=' + tableData.bookCategory + '&authorName=' + tableData.authorName +
-      '&publishHorse=' + tableData.publishHorse + '&publishDate=' +
-      tableData.publishDate + '&pageNumber=' + tableData.pageNumber + '&remarks=' + tableData.remarks + ' ',
+    url: 'http://47.106.202.38:8010/api/bookList/insertBook?isbn=' +
+      tableData.id +
+      '&bookName=' +
+      tableData.bookName +
+      '&bookCategory=' +
+      tableData.bookCategory +
+      '&authorName=' +
+      tableData.authorName +
+      '&publishHorse=' +
+      tableData.publishHorse +
+      '&publishDate=' +
+      tableData.publishDate +
+      '&pageNumber=' +
+      tableData.pageNumber +
+      '&remarks=' +
+      tableData.remarks +
+      ' ',
     method: 'put'
   })
 }
 
-export const saveTableBookData = (bookData) => {
+export const saveTableBookData = bookData => {
   return axios.request({
-    url: 'http://localhost:9966/api/bookList/insertBook',
+    url: 'http://47.106.202.38:8010/api/bookList/insertBook',
     bookData,
     method: 'post'
   })
@@ -154,7 +185,7 @@ export const saveTableBookData = (bookData) => {
 
 export const getTableBookData = () => {
   return axios.request({
-    url: 'http://localhost:9966/api/bookList',
+    url: 'http://47.106.202.38:8010/api/bookList',
     method: 'get'
   })
 }
@@ -166,28 +197,38 @@ export const loadComputerList = () => {
   return new Promise((resolve, reject) => {
     const computer = {
       title: '计算机相关书籍',
-      link: ['电脑馆', '游戏极品', '装机大师', '职场焕新', '女神频道', '虚拟现实', '二合一平板', '电子教育', '万物周刊'],
+      link: [
+        '电脑馆',
+        '游戏极品',
+        '装机大师',
+        '职场焕新',
+        '女神频道',
+        '虚拟现实',
+        '二合一平板',
+        '电子教育',
+        '万物周刊'
+      ],
       detail: [{
         bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
         itemFour: [{
           title: '计算机网络',
 
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/jisuanjiwangluo.jpg'
         },
         {
           title: '算法导论',
 
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/suanfadaolun.jpg'
         },
         {
           title: 'Vue.js实战',
 
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png'
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/Vuejsshizhan.jpg'
         },
         {
           title: '计算机操作系统',
 
-          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/item-computer-1-5.jpg'
+          img: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/jisuanjicaozuoxitong.jpg'
         }
         ],
         itemContent: [
@@ -197,7 +238,7 @@ export const loadComputerList = () => {
         ]
       },
       {
-        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/runjiangongcheng.png',
+        bigImg: 'https://github.com/cychust/admin/raw/master/static/img/index/computer/Androidkaifa.jpg',
         itemFour: [{
           title: '计算机组成原理',
 
@@ -439,7 +480,20 @@ export const loadGoodsInfo = () => {
         ],
         remarks: {
           goodAnalyse: 90,
-          remarksTags: ['颜色可人', '实惠优选', '严丝合缝', '极致轻薄', '质量没话说', '比定做还合适', '完美品质', '正品行货', '包装有档次', '不容易发热', '已经买第二个', '是全覆盖'],
+          remarksTags: [
+            '颜色可人',
+            '实惠优选',
+            '严丝合缝',
+            '极致轻薄',
+            '质量没话说',
+            '比定做还合适',
+            '完美品质',
+            '正品行货',
+            '包装有档次',
+            '不容易发热',
+            '已经买第二个',
+            '是全覆盖'
+          ],
           remarksNumDetail: [2000, 3000, 900, 1],
           detail: [{
             username: 'p****1',
@@ -490,14 +544,14 @@ export const loadGoodsInfo = () => {
     }, 300)
   })
 }
-export const loadBookInfo = (id) => {
+export const loadBookInfo = id => {
   return axios.request({
-    url: 'http://localhost:9966/api/book?id=' + id,
+    url: 'http://47.106.202.38:8010/api/book?id=' + id,
     method: 'get'
   })
 }
 
-export const mergeBookInfo = (data) => {
+export const mergeBookInfo = data => {
   return new Promise((resolve, reject) => {
     const ret = {
       id: data.id,
@@ -513,7 +567,7 @@ export const mergeBookInfo = (data) => {
     resolve(ret)
   })
 }
-export const borrowBookApi = (bookInfo) => {
+export const borrowBookApi = bookInfo => {
   const data = {
     isbn: bookInfo.id,
     book_name: bookInfo.bookName,
@@ -521,20 +575,19 @@ export const borrowBookApi = (bookInfo) => {
     create_time: '2018-10-11'
   }
   return axios.request({
-    url: 'http://localhost:9966/api/addOrder',
+    url: 'http://47.106.202.38:8010/api/addOrder',
     params: data,
     method: 'post'
   })
 }
-export const returnBookApi = (order) => {
+export const returnBookApi = order => {
   let finishedTime = timeFormat(new Date())
   var params = {
     finished_time: finishedTime,
     order_id: order.orderId
-
   }
   return axios.request({
-    url: 'http://localhost:9966/api/updateOrder',
+    url: 'http://47.106.202.38:8010/api/updateOrder',
     params: params,
     method: 'put'
   })

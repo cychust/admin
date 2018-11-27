@@ -74,7 +74,7 @@ export default {
   name: 'BookDetail',
   data () {
     return {
-      id: 2,
+      id: 1,
       username: 'cyc',
       goodsInfo: {},
       bookInfo: {},
@@ -87,6 +87,7 @@ export default {
   },
   methods: {
     borrowBook () {
+      console.error(this.bookInfo.id)
       borrowBookApi(this.bookInfo).then((res) => {
         this.isBorrowed = true
         this.$Message.info('成功')
@@ -124,6 +125,7 @@ export default {
         // console.error(res)
         this.bookInfo = res
         this.isBorrowed = res.is_borrowed
+        console.error(this.isBorrowed)
         console.error(this.bookInfo)
       })
       // console.error(this.bookInfo)

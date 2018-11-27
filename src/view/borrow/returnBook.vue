@@ -144,7 +144,7 @@ export default {
         }
         item.img = 'https://github.com/cychust/admin/raw/master/static/img/goodsDetail/pack/1.jpg'
       })
-      // console.error(result.data.data)
+      console.error(result.data.data)
     })
   }
 }
